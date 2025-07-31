@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ColecaoJogoVideoGame</string>
+    <string name="jogo_video_game">Jogos de Video Game</string>
+    <string name="nome">Nome</string>
+    <string name="nome_jogo">Nome do Jogo</string>
+    <string name="ano_lancamento">Ano</string>
+    <string name="ano_lancamento_valor">Ano Lançamento</string>
+    <string name="limpar">Limpar</string>
+    <string name="salvar">Salvar</string>
+</resources>
