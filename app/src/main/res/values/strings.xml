@@ -7,4 +7,9 @@
     <string name="ano_lancamento_valor">Ano Lançamento</string>
     <string name="limpar">Limpar</string>
     <string name="salvar">Salvar</string>
+    <string name="entradas_apagadas">Entradas apagadas!</string>
+    <string name="o_nome_nao_pode_ser_vazio">O nome não pode ser vazio!</string>
+    <string name="o_ano_nao_pode_ser_vazio">O ano não pode ser vazio!</string>
+    <string name="jogo_valor">"Jogo: "</string>
+    <string name="ano_valor">"Ano: "</string>
 </resources>
