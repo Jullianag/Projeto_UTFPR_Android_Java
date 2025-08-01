@@ -12,4 +12,6 @@
     <string name="o_ano_nao_pode_ser_vazio">O ano não pode ser vazio!</string>
     <string name="jogo_valor">"Jogo: "</string>
     <string name="ano_valor">"Ano: "</string>
+    <string name="o_ano_deve_ser_um_numero_inteiro">O ano deve ser um número inteiro!</string>
+    <string name="o_ano_deve_estar_entre_1972_e_o_ano_atual">O ano deve estar entre 1972 e o ano atual!</string>
 </resources>
