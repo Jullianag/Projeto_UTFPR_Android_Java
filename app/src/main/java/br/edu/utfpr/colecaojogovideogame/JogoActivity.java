@@ -2,18 +2,23 @@ package br.edu.utfpr.colecaojogovideogame;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class JogoActivity extends AppCompatActivity {
 
     private EditText editTextNome, editTextAno;
+    private CheckBox checkBoxPlay, checkBoxXBox, checkBoxSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +27,18 @@ public class JogoActivity extends AppCompatActivity {
 
         editTextNome = findViewById(R.id.editTextNome);
         editTextAno = findViewById(R.id.editTextAno);
+        checkBoxPlay = findViewById(R.id.checkBoxPlay);
+        checkBoxXBox = findViewById(R.id.checkBoxXBox);
+        checkBoxSwitch = findViewById(R.id.checkBoxSwitch);
     }
 
     public void limparCampos(View view) {
 
         editTextNome.setText(null);
         editTextAno.setText(null);
+        checkBoxPlay.setChecked(false);
+        checkBoxXBox.setChecked(false);
+        checkBoxSwitch.setChecked(false);
 
         editTextNome.requestFocus();
 
@@ -102,9 +113,33 @@ public class JogoActivity extends AppCompatActivity {
             return;
         }
 
+        boolean playstationConsole = checkBoxPlay.isChecked();
+        boolean xBoxConsole = checkBoxXBox.isChecked();
+        boolean switchConsole = checkBoxSwitch.isChecked();
+
+        if (!playstationConsole && !xBoxConsole && !switchConsole) {
+            Toast.makeText(this,
+                    R.string.deve_ser_marcado_pelo_menos_um_console,
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        List<String> consoles = new ArrayList<>();
+
+        if (playstationConsole) {
+            consoles.add(getString(R.string.playstation));
+        }
+        if (xBoxConsole) {
+            consoles.add(getString(R.string.xbox));
+        }
+        if (switchConsole) {
+            consoles.add(getString(R.string.nintendo_switch));
+        }
+
         Toast.makeText(this,
                 getString(R.string.jogo_valor) + nome + "\n" +
-                getString(R.string.ano_valor) + ano,
+                getString(R.string.ano_valor) + ano + "\n" +
+                        TextUtils.join(", ", consoles),
                 Toast.LENGTH_LONG).show();
     }
 }

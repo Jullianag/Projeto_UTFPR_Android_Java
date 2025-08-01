@@ -77,17 +77,61 @@
         app:layout_constraintStart_toEndOf="@+id/textViewAno"
         app:layout_constraintTop_toBottomOf="@+id/editTextNome" />
 
+    <TextView
+        android:id="@+id/textViewConsole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/console"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAno" />
+
+    <CheckBox
+        android:id="@+id/checkBoxPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/playstation"
+        app:layout_constraintEnd_toStartOf="@+id/checkBoxXBox"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewConsole" />
+
+    <CheckBox
+        android:id="@+id/checkBoxXBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/xbox"
+        app:layout_constraintEnd_toStartOf="@+id/checkBoxSwitch"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxPlay"
+        app:layout_constraintTop_toTopOf="@+id/checkBoxPlay" />
+
+    <CheckBox
+        android:id="@+id/checkBoxSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/nintendo_switch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxXBox"
+        app:layout_constraintTop_toTopOf="@+id/checkBoxXBox" />
+
     <Button
         android:id="@+id/buttonSalvar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:onClick="salvarValores"
         android:text="@string/salvar"
         app:layout_constraintEnd_toStartOf="@+id/buttonLimpar"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextAno" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxPlay" />
 
     <Button
         android:id="@+id/buttonLimpar"
