@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ public class JogoActivity extends AppCompatActivity {
 
     private EditText editTextNome, editTextAno;
     private CheckBox checkBoxPlay, checkBoxXBox, checkBoxSwitch;
+    private RadioGroup radioGroupTipoMidia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class JogoActivity extends AppCompatActivity {
         checkBoxPlay = findViewById(R.id.checkBoxPlay);
         checkBoxXBox = findViewById(R.id.checkBoxXBox);
         checkBoxSwitch = findViewById(R.id.checkBoxSwitch);
+        radioGroupTipoMidia = findViewById(R.id.radioGroupTipoMidia);
     }
 
     public void limparCampos(View view) {
@@ -39,6 +42,7 @@ public class JogoActivity extends AppCompatActivity {
         checkBoxPlay.setChecked(false);
         checkBoxXBox.setChecked(false);
         checkBoxSwitch.setChecked(false);
+        radioGroupTipoMidia.clearCheck();
 
         editTextNome.requestFocus();
 
@@ -136,10 +140,31 @@ public class JogoActivity extends AppCompatActivity {
             consoles.add(getString(R.string.nintendo_switch));
         }
 
+        int radioButtonId = radioGroupTipoMidia.getCheckedRadioButtonId();
+
+        String tipoMidia;
+
+        if (radioButtonId == R.id.radioButtonFisica) {
+            tipoMidia = getString(R.string.fisica);
+
+        } else {
+
+            if (radioButtonId == R.id.radioButtonDigital) {
+                tipoMidia = getString(R.string.digital);
+            } else {
+                Toast.makeText(this,
+                        R.string.e_obrigatorio_o_tipo_de_midia,
+                        Toast.LENGTH_LONG).show();
+
+                return;
+            }
+        }
+
         Toast.makeText(this,
                 getString(R.string.jogo_valor) + nome + "\n" +
                 getString(R.string.ano_valor) + ano + "\n" +
-                        TextUtils.join(", ", consoles),
+                        TextUtils.join(", ", consoles) + "\n" +
+                getString(R.string.midia) + tipoMidia,
                 Toast.LENGTH_LONG).show();
     }
 }

@@ -19,4 +19,10 @@
     <string name="xbox">XBox</string>
     <string name="nintendo_switch">Switch</string>
     <string name="deve_ser_marcado_pelo_menos_um_console">Deve ser marcado pelo menos um console!</string>
+    <string name="tipo_midia">Tipo de mídia:</string>
+    <string name="fisica">Física</string>
+    <string name="digital">Digital</string>
+    <string name="e_obrigatorio_o_tipo_de_midia">É obrigatório o tipo de mídia!</string>
+    <string name="midia">"Mídia: "</string>
+    <string name="genero">Gênero:</string>
 </resources>

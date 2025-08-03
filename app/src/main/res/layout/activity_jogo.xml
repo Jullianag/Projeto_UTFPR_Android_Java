@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="48dp"
         android:labelFor="@id/editTextAno"
         android:text="@string/ano_lancamento"
         app:layout_constraintEnd_toStartOf="@+id/editTextAno"
@@ -67,7 +67,7 @@
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="@string/ano_lancamento_valor"
@@ -82,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:text="@string/console"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewAno" />
@@ -120,18 +120,72 @@
         app:layout_constraintStart_toEndOf="@+id/checkBoxXBox"
         app:layout_constraintTop_toTopOf="@+id/checkBoxXBox" />
 
+    <TextView
+        android:id="@+id/textViewTipoMidia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:labelFor="@id/radioGroupTipoMidia"
+        android:text="@string/tipo_midia"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxPlay" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupTipoMidia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewTipoMidia"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTipoMidia">
+
+        <RadioButton
+            android:id="@+id/radioButtonFisica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fisica" />
+
+        <RadioButton
+            android:id="@+id/radioButtonDigital"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/digital" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textViewGenero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:labelFor="@id/spinnerGenero"
+        android:text="@string/genero"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupTipoMidia" />
+
+    <Spinner
+        android:id="@+id/spinnerGenero"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGenero" />
+
     <Button
         android:id="@+id/buttonSalvar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:onClick="salvarValores"
         android:text="@string/salvar"
         app:layout_constraintEnd_toStartOf="@+id/buttonLimpar"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxPlay" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerGenero" />
 
     <Button
         android:id="@+id/buttonLimpar"
