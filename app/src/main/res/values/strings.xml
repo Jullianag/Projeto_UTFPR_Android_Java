@@ -22,7 +22,16 @@
     <string name="tipo_midia">Tipo de mídia:</string>
     <string name="fisica">Física</string>
     <string name="digital">Digital</string>
-    <string name="e_obrigatorio_o_tipo_de_midia">É obrigatório o tipo de mídia!</string>
+    <string name="acao">Ação</string>
+    <string name="aventura">Aventura</string>
+    <string name="corrida">Corrida</string>
+    <string name="estrategia">Estratégia</string>
+    <string name="rpg">RPG</string>
+    <string name="esporte">Esporte</string>
     <string name="midia">"Mídia: "</string>
     <string name="genero">Gênero:</string>
+    <string name="e_obrigatorio_o_tipo_de_midia">É obrigatório o tipo de mídia!</string>
+    <string name="o_spinner_nao_possui_valores">O Spinner não possui valores!</string>
+    <string name="genero_valor">"Gênero: "</string>
+    <string name="consoles">"Consoles: "</string>
 </resources>

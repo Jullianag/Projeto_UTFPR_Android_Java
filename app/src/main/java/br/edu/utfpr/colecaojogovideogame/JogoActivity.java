@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,8 @@ public class JogoActivity extends AppCompatActivity {
     private CheckBox checkBoxPlay, checkBoxXBox, checkBoxSwitch;
     private RadioGroup radioGroupTipoMidia;
 
+    private Spinner spinnerGenero;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,7 @@ public class JogoActivity extends AppCompatActivity {
         checkBoxXBox = findViewById(R.id.checkBoxXBox);
         checkBoxSwitch = findViewById(R.id.checkBoxSwitch);
         radioGroupTipoMidia = findViewById(R.id.radioGroupTipoMidia);
+        spinnerGenero = findViewById(R.id.spinnerGenero);
     }
 
     public void limparCampos(View view) {
@@ -43,6 +47,7 @@ public class JogoActivity extends AppCompatActivity {
         checkBoxXBox.setChecked(false);
         checkBoxSwitch.setChecked(false);
         radioGroupTipoMidia.clearCheck();
+        spinnerGenero.setSelection(0);
 
         editTextNome.requestFocus();
 
@@ -160,11 +165,22 @@ public class JogoActivity extends AppCompatActivity {
             }
         }
 
+        String genero = (String) spinnerGenero.getSelectedItem();
+
+        if (genero == null) {
+            Toast.makeText(this,
+                    R.string.o_spinner_nao_possui_valores,
+                    Toast.LENGTH_LONG).show();
+
+            return;
+        }
+
         Toast.makeText(this,
                 getString(R.string.jogo_valor) + nome + "\n" +
                 getString(R.string.ano_valor) + ano + "\n" +
-                        TextUtils.join(", ", consoles) + "\n" +
-                getString(R.string.midia) + tipoMidia,
+                getString(R.string.consoles) + TextUtils.join(", ", consoles) + "\n" +
+                getString(R.string.midia) + tipoMidia + "\n" +
+                getString(R.string.genero_valor) + genero,
                 Toast.LENGTH_LONG).show();
     }
 }
