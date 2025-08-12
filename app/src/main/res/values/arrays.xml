@@ -10,4 +10,95 @@
         <item>@string/esporte</item>
     </string-array>
 
+    <string-array name="jogos_nome">
+        <item>Spider-Man 2</item>
+        <item>The Witcher 3</item>
+        <item>Ghost of Tsushima</item>
+        <item>Life is Strange 2</item>
+        <item>The Last of Us</item>
+        <item>Cyberpunk 2077</item>
+        <item>Legend of Zelda-Breath of the Wild</item>
+        <item>Final Fantasy VII Remake</item>
+        <item>Days Gone</item>
+        <item>Red Dead Redemption II</item>
+    </string-array>
+
+    <integer-array name="jogos_anos">
+        <item>2023</item>
+        <item>2015</item>
+        <item>2020</item>
+        <item>2018</item>
+        <item>2013</item>
+        <item>2020</item>
+        <item>2017</item>
+        <item>2020</item>
+        <item>2019</item>
+        <item>2018</item>
+    </integer-array>
+    
+    <integer-array name="jogos_consoles_playstation">
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>1</item>
+    </integer-array>
+
+    <integer-array name="jogos_consoles_xbox">
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+    </integer-array>
+
+    <integer-array name="jogos_consoles_switch">
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+    </integer-array>
+
+    <integer-array name="jogos_generos">
+        <item>0</item>
+        <item>4</item>
+        <item>4</item>
+        <item>1</item>
+        <item>0</item>
+        <item>4</item>
+        <item>1</item>
+        <item>4</item>
+        <item>0</item>
+        <item>0</item>
+    </integer-array>
+
+    <integer-array name="jogos_tipos_midias">
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>1</item>
+    </integer-array>
+
 </resources>
