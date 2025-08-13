@@ -23,7 +23,9 @@
     <string name="fisica">Física</string>
     <string name="digital">Digital</string>
     <string name="acao">Ação</string>
+    <string name="puzzle">Puzzle</string>
     <string name="aventura">Aventura</string>
+    <string name ="acao_aventura">Ação e aventura</string>
     <string name="corrida">Corrida</string>
     <string name="estrategia">Estratégia</string>
     <string name="rpg">RPG</string>

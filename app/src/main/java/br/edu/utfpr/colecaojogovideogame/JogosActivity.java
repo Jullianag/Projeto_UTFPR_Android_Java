@@ -14,6 +14,8 @@ public class JogosActivity extends AppCompatActivity {
 
     private List<Jogo> listaJogos;
 
+    private JogoAdapter jogoAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +65,8 @@ public class JogosActivity extends AppCompatActivity {
             listaJogos.add(jogo);
         }
 
+        jogoAdapter = new JogoAdapter(this, listaJogos);
 
-
+        listViewJogos.setAdapter(jogoAdapter);
     }
 }

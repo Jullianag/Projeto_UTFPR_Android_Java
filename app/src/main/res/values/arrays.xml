@@ -2,8 +2,8 @@
 <resources>
     
     <string-array name="generos">
-        <item>@string/acao</item>
-        <item>@string/aventura</item>
+        <item>@string/puzzle</item>
+        <item>@string/acao_aventura</item>
         <item>@string/corrida</item>
         <item>@string/estrategia</item>
         <item>@string/rpg</item>
@@ -14,12 +14,12 @@
         <item>Spider-Man 2</item>
         <item>The Witcher 3</item>
         <item>Ghost of Tsushima</item>
-        <item>Life is Strange 2</item>
+        <item>Forza Horizon 5</item>
         <item>The Last of Us</item>
         <item>Cyberpunk 2077</item>
         <item>Legend of Zelda-Breath of the Wild</item>
         <item>Final Fantasy VII Remake</item>
-        <item>Days Gone</item>
+        <item>EA Sports FC 25</item>
         <item>Red Dead Redemption II</item>
     </string-array>
 
@@ -27,12 +27,12 @@
         <item>2023</item>
         <item>2015</item>
         <item>2020</item>
-        <item>2018</item>
+        <item>2021</item>
         <item>2013</item>
         <item>2020</item>
         <item>2017</item>
         <item>2020</item>
-        <item>2019</item>
+        <item>2024</item>
         <item>2018</item>
     </integer-array>
     
@@ -58,7 +58,7 @@
         <item>1</item>
         <item>0</item>
         <item>0</item>
-        <item>0</item>
+        <item>1</item>
         <item>1</item>
     </integer-array>
 
@@ -71,21 +71,21 @@
         <item>0</item>
         <item>1</item>
         <item>0</item>
-        <item>0</item>
+        <item>1</item>
         <item>0</item>
     </integer-array>
 
     <integer-array name="jogos_generos">
-        <item>0</item>
-        <item>4</item>
-        <item>4</item>
-        <item>1</item>
-        <item>0</item>
-        <item>4</item>
         <item>1</item>
         <item>4</item>
-        <item>0</item>
-        <item>0</item>
+        <item>4</item>
+        <item>2</item>
+        <item>1</item>
+        <item>4</item>
+        <item>1</item>
+        <item>4</item>
+        <item>5</item>
+        <item>1</item>
     </integer-array>
 
     <integer-array name="jogos_tipos_midias">

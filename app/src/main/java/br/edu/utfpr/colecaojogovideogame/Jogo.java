@@ -81,4 +81,15 @@ public class Jogo {
     public void setTipoMidia(TipoMidia tipoMidia) {
         this.tipoMidia = tipoMidia;
     }
+
+    @Override
+    public String toString() {
+        return nome + "\n" +
+                ano + "\n" +
+                playstation + "\n" +
+                xbox + "\n" +
+                nintendoSwitch + "\n" +
+                genero + "\n" +
+                tipoMidia;
+    }
 }
