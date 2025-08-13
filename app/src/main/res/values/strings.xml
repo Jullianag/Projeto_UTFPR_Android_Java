@@ -36,4 +36,6 @@
     <string name="o_spinner_nao_possui_valores">O Spinner não possui valores!</string>
     <string name="genero_valor">"Gênero: "</string>
     <string name="consoles">"Consoles: "</string>
+    <string name="o_jogo">O jogo \"</string>
+    <string name="foi_clicado">\"\nfoi clicado!</string>
 </resources>

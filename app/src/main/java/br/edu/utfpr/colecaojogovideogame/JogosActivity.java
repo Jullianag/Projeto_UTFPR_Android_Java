@@ -1,7 +1,10 @@
 package br.edu.utfpr.colecaojogovideogame;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +25,19 @@ public class JogosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_jogos);
 
         listViewJogos = findViewById(R.id.listViewJogos);
+
+        listViewJogos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Jogo jogo = (Jogo) listViewJogos.getItemAtPosition(position);
+
+                Toast.makeText(getApplicationContext(),
+                        getString(R.string.o_jogo) + jogo.getNome() + getString(R.string.foi_clicado),
+                        Toast.LENGTH_LONG).show();
+            }
+        });
 
         popularListaJogos();
     }
