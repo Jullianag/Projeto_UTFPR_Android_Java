@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.ColecaoJogoVideoGame" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.ThemeStylesIcons" parent="Theme.Material3.Light">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+         <item name="colorPrimary">@color/amarelo</item>
+         <item name="colorPrimaryVariant">@color/amarelo_escuro</item>
+         <item name="colorOnPrimary">@color/preto</item>
     </style>
-
-    <style name="Theme.ColecaoJogoVideoGame" parent="Base.Theme.ColecaoJogoVideoGame" />
 </resources>
