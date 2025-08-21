@@ -25,7 +25,7 @@
     <string name="acao">Ação</string>
     <string name="puzzle">Puzzle</string>
     <string name="aventura">Aventura</string>
-    <string name ="acao_aventura">Ação e aventura</string>
+    <string name="acao_aventura">Ação e aventura</string>
     <string name="corrida">Corrida</string>
     <string name="estrategia">Estratégia</string>
     <string name="rpg">RPG</string>
@@ -38,4 +38,9 @@
     <string name="consoles">"Consoles: "</string>
     <string name="o_jogo">O jogo \"</string>
     <string name="foi_clicado">\"\nfoi clicado!</string>
+    <string name="logo_utfpr">Logo da UTFPR</string>
+    <string name="descricao">Projeto do Curso de Desenvolvimento Android</string>
+    <string name="autoria">Autor: Julliana Gnecco</string>
+    <string name="sobre">Sobre</string>
+    <string name="controle_de_jogos">Controle de Jogos</string>
 </resources>

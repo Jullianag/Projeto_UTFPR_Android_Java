@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThemeStylesIcons">
         <activity
+            android:name=".SobreActivity"
+            android:exported="false" />
+        <activity
             android:name=".JogosActivity"
             android:exported="true">
             <intent-filter>
@@ -22,8 +25,7 @@
         </activity>
         <activity
             android:name=".JogoActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
     </application>
 
 </manifest>

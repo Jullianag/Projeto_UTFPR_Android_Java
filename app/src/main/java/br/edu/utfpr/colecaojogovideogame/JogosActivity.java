@@ -1,5 +1,6 @@
 package br.edu.utfpr.colecaojogovideogame;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,6 +24,8 @@ public class JogosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jogos);
+
+        setTitle(getString(R.string.controle_de_jogos));
 
         listViewJogos = findViewById(R.id.listViewJogos);
 
@@ -84,5 +87,12 @@ public class JogosActivity extends AppCompatActivity {
         jogoAdapter = new JogoAdapter(this, listaJogos);
 
         listViewJogos.setAdapter(jogoAdapter);
+    }
+
+    public void abrirSobre(View view) {
+
+        Intent intentAbertura = new Intent(this, SobreActivity.class);
+
+        startActivity(intentAbertura);
     }
 }
