@@ -5,5 +5,7 @@
          <item name="colorPrimary">@color/amarelo</item>
          <item name="colorPrimaryVariant">@color/amarelo_escuro</item>
          <item name="colorOnPrimary">@color/preto</item>
+
+        <item name="android:textColorLink">@color/azul_escuro</item>
     </style>
 </resources>

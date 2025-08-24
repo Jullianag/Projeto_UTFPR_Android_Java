@@ -7,6 +7,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -47,13 +51,13 @@ public class JogosActivity extends AppCompatActivity {
 
     private void popularListaJogos() {
 
-        String[] jogos_nomes = getResources().getStringArray(R.array.jogos_nome);
+        /*String[] jogos_nomes = getResources().getStringArray(R.array.jogos_nome);
         int[] jogos_anos = getResources().getIntArray(R.array.jogos_anos);
         int[] jogos_playstation = getResources().getIntArray(R.array.jogos_consoles_playstation);
         int[] jogos_xbox = getResources().getIntArray(R.array.jogos_consoles_xbox);
         int[] jogos_switch = getResources().getIntArray(R.array.jogos_consoles_switch);
         int[] jogos_generos = getResources().getIntArray(R.array.jogos_generos);
-        int[] jogos_tipos_midias = getResources().getIntArray(R.array.jogos_tipos_midias);
+        int[] jogos_tipos_midias = getResources().getIntArray(R.array.jogos_tipos_midias);*/
 
         listaJogos = new ArrayList<>();
 
@@ -65,7 +69,7 @@ public class JogosActivity extends AppCompatActivity {
 
         TipoMidia[] tiposMidias = TipoMidia.values();
 
-        for (int i = 0; i < jogos_nomes.length; i++) {
+        /*for (int i = 0; i < jogos_nomes.length; i++) {
 
             playstation = jogos_playstation[i] == 1 ? true : false;
             xbox = jogos_xbox[i] == 1 ? true : false;
@@ -82,7 +86,7 @@ public class JogosActivity extends AppCompatActivity {
                     tipoMidia);
 
             listaJogos.add(jogo);
-        }
+        }*/
 
         jogoAdapter = new JogoAdapter(this, listaJogos);
 
@@ -94,5 +98,47 @@ public class JogosActivity extends AppCompatActivity {
         Intent intentAbertura = new Intent(this, SobreActivity.class);
 
         startActivity(intentAbertura);
+
+    }
+
+    ActivityResultLauncher<Intent> launcherNovoJogo = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == JogosActivity.RESULT_OK) {
+
+                        Intent intent = result.getData();
+
+                        Bundle bundle = intent.getExtras();
+
+                        if (bundle != null) {
+
+                            String nome = bundle.getString(JogoActivity.KEY_NOME);
+                            int ano = bundle.getInt(JogoActivity.KEY_ANO);
+                            ArrayList<String> consoles = bundle.getStringArrayList(JogoActivity.KEY_CONSOLES);
+                            int genero = bundle.getInt(JogoActivity.KEY_GENERO);
+                            String tipoMidiaTexto = bundle.getString(JogoActivity.KEY_TIPO_MIDIA);
+
+                            boolean playstation = consoles != null && consoles.contains(getString(R.string.playstation));
+                            boolean xBox = consoles != null && consoles.contains(getString(R.string.xbox));
+                            boolean nintendoSwitch = consoles != null && consoles.contains(getString(R.string.nintendo_switch));
+
+                            Jogo jogo = new Jogo(nome, ano, playstation, xBox, nintendoSwitch,
+                                    genero, TipoMidia.valueOf(tipoMidiaTexto));
+
+                            listaJogos.add(jogo);
+
+                            jogoAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+            });
+
+    public void abrirNovoJogo(View view) {
+
+        Intent intentAbertura = new Intent(this, JogoActivity.class);
+
+        launcherNovoJogo.launch(intentAbertura);
     }
 }

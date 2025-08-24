@@ -1,9 +1,10 @@
 package br.edu.utfpr.colecaojogovideogame;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -19,6 +20,12 @@ import java.util.List;
 
 public class JogoActivity extends AppCompatActivity {
 
+    public static final String KEY_NOME = "KEY_NOME";
+    public static final String KEY_ANO = "KEY_ANO";
+    public static final String KEY_CONSOLES = "KEY_CONSOLES";
+    public static final String KEY_GENERO = "KEY_GENERO";
+    public static final String KEY_TIPO_MIDIA = "KEY_TIPO_MIDIA";
+
     private EditText editTextNome, editTextAno;
     private CheckBox checkBoxPlay, checkBoxXBox, checkBoxSwitch;
     private RadioGroup radioGroupTipoMidia;
@@ -29,6 +36,8 @@ public class JogoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jogo);
+
+        setTitle(getString(R.string.novo_jogo));
 
         editTextNome = findViewById(R.id.editTextNome);
         editTextAno = findViewById(R.id.editTextAno);
@@ -147,15 +156,15 @@ public class JogoActivity extends AppCompatActivity {
 
         int radioButtonId = radioGroupTipoMidia.getCheckedRadioButtonId();
 
-        String tipoMidia;
+        TipoMidia tipoMidia;
 
         if (radioButtonId == R.id.radioButtonFisica) {
-            tipoMidia = getString(R.string.fisica);
+            tipoMidia = TipoMidia.Fisica;
 
         } else {
 
             if (radioButtonId == R.id.radioButtonDigital) {
-                tipoMidia = getString(R.string.digital);
+                tipoMidia = TipoMidia.Digital;
             } else {
                 Toast.makeText(this,
                         R.string.e_obrigatorio_o_tipo_de_midia,
@@ -165,9 +174,9 @@ public class JogoActivity extends AppCompatActivity {
             }
         }
 
-        String genero = (String) spinnerGenero.getSelectedItem();
+        int genero = spinnerGenero.getSelectedItemPosition();
 
-        if (genero == null) {
+        if (genero == AdapterView.INVALID_POSITION) {
             Toast.makeText(this,
                     R.string.o_spinner_nao_possui_valores,
                     Toast.LENGTH_LONG).show();
@@ -175,12 +184,16 @@ public class JogoActivity extends AppCompatActivity {
             return;
         }
 
-        Toast.makeText(this,
-                getString(R.string.jogo_valor) + nome + "\n" +
-                getString(R.string.ano_valor) + ano + "\n" +
-                getString(R.string.consoles) + TextUtils.join(", ", consoles) + "\n" +
-                getString(R.string.midia) + tipoMidia + "\n" +
-                getString(R.string.genero_valor) + genero,
-                Toast.LENGTH_LONG).show();
+        Intent intentResposta = new Intent();
+
+        intentResposta.putExtra(KEY_NOME, nome);
+        intentResposta.putExtra(KEY_ANO, ano);
+        intentResposta.putExtra(KEY_CONSOLES, new ArrayList<>(consoles));
+        intentResposta.putExtra(KEY_GENERO, genero);
+        intentResposta.putExtra(KEY_TIPO_MIDIA, tipoMidia.toString());
+
+        setResult(JogoActivity.RESULT_OK, intentResposta);
+
+        finish();
     }
 }

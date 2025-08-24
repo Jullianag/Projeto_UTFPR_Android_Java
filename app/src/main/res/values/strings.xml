@@ -40,7 +40,16 @@
     <string name="foi_clicado">\"\nfoi clicado!</string>
     <string name="logo_utfpr">Logo da UTFPR</string>
     <string name="descricao">Projeto do Curso de Desenvolvimento Android</string>
-    <string name="autoria">Autor: Julliana Gnecco</string>
+    <string name="autoria">Autor: <a href ="https://www.linkedin.com/in/julliana-gnecco/">Julliana Gnecco</a></string>
     <string name="sobre">Sobre</string>
     <string name="controle_de_jogos">Controle de Jogos</string>
+    <string name="adicionar">Adicionar</string>
+    <string name="novo_jogo">Novo Jogo</string>
+    <string name="site_utfpr">www.utfpr.edu.br</string>
+    <string name="e_mail_autor"><u>jullianagnecco@gmail.com</u></string>
+    <string name="nenhum_aplicativo_disponivel_para_abrir_paginas_web">Nenhum aplicativo disponível para abrir páginas web</string>
+    <string name="contato_pelo_aplicativo">Contato pelo aplicativo</string>
+    <string name="nenhum_aplicativo_para_enviar_um_email">Nenhum aplicativo para enviar um email</string>
+    <string name="escolha_o_app_de_e_mail">Escolha o app de e-mail</string>
+    <string name="abrir_link_com">Abrir link com</string>
 </resources>
