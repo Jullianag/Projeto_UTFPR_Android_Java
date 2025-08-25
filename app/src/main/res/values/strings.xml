@@ -52,4 +52,5 @@
     <string name="nenhum_aplicativo_para_enviar_um_email">Nenhum aplicativo para enviar um email</string>
     <string name="escolha_o_app_de_e_mail">Escolha o app de e-mail</string>
     <string name="abrir_link_com">Abrir link com</string>
+    <string name="recebeu_um_click_longo">\"\n recebeu um click longo!</string>
 </resources>

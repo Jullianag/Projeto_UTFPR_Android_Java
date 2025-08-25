@@ -7,8 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".JogosActivity">
 
-    <ListView
-        android:id="@+id/listViewJogos"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewJogos"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -17,11 +17,9 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSobre"
-        app:layout_constraintVertical_bias="1.0"
-        tools:listitem="@layout/linha_lista_jogos" />
+        tools:listitem="@layout/linha_lista_jogos"/>
 
     <Button
         android:id="@+id/buttonSobre"
@@ -50,4 +48,5 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
