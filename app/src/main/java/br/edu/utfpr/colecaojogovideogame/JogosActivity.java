@@ -1,10 +1,18 @@
 package br.edu.utfpr.colecaojogovideogame;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -80,7 +88,7 @@ public class JogosActivity extends AppCompatActivity {
         recyclerViewJogos.setAdapter(jogoRecyclerViewAdapter);
     }
 
-    /*public void abrirSobre(View view) {
+    public void abrirSobre() {
 
         Intent intentAbertura = new Intent(this, SobreActivity.class);
 
@@ -91,6 +99,7 @@ public class JogosActivity extends AppCompatActivity {
     ActivityResultLauncher<Intent> launcherNovoJogo = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
+
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == JogosActivity.RESULT_OK) {
@@ -116,16 +125,43 @@ public class JogosActivity extends AppCompatActivity {
 
                             listaJogos.add(jogo);
 
-                            jogoAdapter.notifyDataSetChanged();
+                            jogoRecyclerViewAdapter.notifyDataSetChanged();
                         }
                     }
                 }
             });
 
-    public void abrirNovoJogo(View view) {
+    public void abrirNovoJogo() {
 
         Intent intentAbertura = new Intent(this, JogoActivity.class);
 
         launcherNovoJogo.launch(intentAbertura);
-    }*/
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.jogos_opcoes, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int idMenuItem = item.getItemId();
+
+        if (idMenuItem == R.id.menuItemAdicionar) {
+            abrirNovoJogo();
+            return true;
+
+        } else {
+            if (idMenuItem == R.id.menuItemSobre) {
+                abrirSobre();
+                return  true;
+
+            } else {
+                return super.onOptionsItemSelected(item);
+            }
+        }
+    }
 }
