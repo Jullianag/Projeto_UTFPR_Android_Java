@@ -40,6 +40,7 @@ public class JogoActivity extends AppCompatActivity {
     private RadioButton radioButtonFisica, radioButtonDigital;
 
     private int modo;
+    private Jogo jogoOriginal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,8 @@ public class JogoActivity extends AppCompatActivity {
                 boolean nintendoSwitch = consoles != null && consoles.contains(getString(R.string.nintendo_switch));
 
                 TipoMidia tipoMidia = TipoMidia.valueOf(tipoMidiaTexto);
+
+                jogoOriginal = new Jogo(nome, ano, playstation, xBox, nintendoSwitch, genero, tipoMidia);
 
                 editTextNome.setText(nome);
                 editTextAno.setText(String.valueOf(ano));
@@ -234,6 +237,20 @@ public class JogoActivity extends AppCompatActivity {
                     R.string.o_spinner_nao_possui_valores,
                     Toast.LENGTH_LONG).show();
 
+            return;
+        }
+
+        if (modo == MODO_EDITAR &&
+                nome.equalsIgnoreCase(jogoOriginal.getNome()) &&
+                ano == jogoOriginal.getAno() &&
+                playstationConsole == jogoOriginal.isPlaystation() &&
+                xBoxConsole == jogoOriginal.isXbox() &&
+                switchConsole == jogoOriginal.isNintendoSwitch() &&
+                genero == jogoOriginal.getGenero() &&
+                tipoMidia == jogoOriginal.getTipoMidia()) {
+
+            setResult(JogoActivity.RESULT_CANCELED);
+            finish();
             return;
         }
 

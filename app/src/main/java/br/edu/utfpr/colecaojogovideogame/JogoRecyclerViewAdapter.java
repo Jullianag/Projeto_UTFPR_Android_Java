@@ -30,13 +30,11 @@ public class JogoRecyclerViewAdapter extends RecyclerView.Adapter<JogoRecyclerVi
     private String[] generos;
 
     interface OnItemClickListener {
-
         void onItemClick(View view, int position);
     }
 
     interface OnItemLongClickListener {
-
-        void onItemLongClick(View view, int position);
+        boolean onItemLongClick(View view, int position);
     }
 
     interface OnCreateContextMenu {

@@ -1,9 +1,11 @@
 package br.edu.utfpr.colecaojogovideogame;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -14,6 +16,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ActionMode;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,6 +33,61 @@ public class JogosActivity extends AppCompatActivity {
     private List<Jogo> listaJogos;
 
     private int posicaoSelecionada = -1;
+
+    private ActionMode actionMode;
+
+    private View viewSelecionada;
+    private Drawable backgroundDrawable;
+
+    private ActionMode.Callback actionModeCallback = new ActionMode.Callback() {
+
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+
+            MenuInflater inflate = mode.getMenuInflater();
+            inflate.inflate(R.menu.jogos_item_selecionado, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+
+            int idMenuItem = item.getItemId();
+
+            if (idMenuItem == R.id.menuItemEditar) {
+                editarJogo();
+                return true;
+            } else {
+
+                if (idMenuItem == R.id.menuItemExcluir) {
+                    excluirJogo();
+                    mode.finish();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+
+            if (viewSelecionada != null) {
+                viewSelecionada.setBackground(backgroundDrawable);
+            }
+
+            actionMode = null;
+            viewSelecionada = null;
+            backgroundDrawable = null;
+
+            recyclerViewJogos.setEnabled(true);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,62 +111,38 @@ public class JogosActivity extends AppCompatActivity {
 
         listaJogos = new ArrayList<>();
 
-        Jogo jogo;
-        boolean playstation;
-        boolean xbox;
-        boolean nintendoSwitch;
-        TipoMidia tipoMidia;
-
-        TipoMidia[] tiposMidias = TipoMidia.values();
-
         jogoRecyclerViewAdapter = new JogoRecyclerViewAdapter(this, listaJogos);
-
-        jogoRecyclerViewAdapter.setOnCreateContextMenu(new JogoRecyclerViewAdapter.OnCreateContextMenu() {
-
-            @Override
-            public void onCreateContextMenu(ContextMenu menu,
-                                            View v, ContextMenu.ContextMenuInfo menuInfo,
-                                            int position,
-                                            MenuItem.OnMenuItemClickListener menuItemClickListener) {
-
-                getMenuInflater().inflate(R.menu.jogos_item_selecionado, menu);
-
-                for (int i = 0; i < menu.size(); i++) {
-                    menu.getItem(i).setOnMenuItemClickListener(menuItemClickListener);
-                }
-
-            }
-        });
-
-        jogoRecyclerViewAdapter.setOnContextMenuClickListener(new JogoRecyclerViewAdapter.OnContextMenuClickListener() {
-
-            @Override
-            public boolean onContextMenuItemClick(MenuItem menuItem, int position) {
-
-                int idMenuItem = menuItem.getItemId();
-
-                if (idMenuItem == R.id.menuItemEditar) {
-
-                    editarJogo(position);
-                    return true;
-                } else {
-
-                    if (idMenuItem == R.id.menuItemExcluir) {
-
-                        excluirJogo(position);
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-            }
-        });
 
         jogoRecyclerViewAdapter.setOnItemClickListener(new JogoRecyclerViewAdapter.OnItemClickListener() {
 
             @Override
             public void onItemClick(View view, int position) {
-                editarJogo(position);
+                posicaoSelecionada = position;
+                editarJogo();
+            }
+        });
+
+        jogoRecyclerViewAdapter.setOnItemLongClickListener(new JogoRecyclerViewAdapter.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(View view, int position) {
+
+                if (actionMode != null) {
+                    return false;
+                }
+
+                posicaoSelecionada = position;
+
+                viewSelecionada = view;
+                backgroundDrawable = view.getBackground();
+
+                view.setBackgroundColor(Color.LTGRAY);
+
+                recyclerViewJogos.setEnabled(false);
+
+                actionMode = startSupportActionMode(actionModeCallback);
+
+                return true;
             }
         });
 
@@ -195,9 +229,9 @@ public class JogosActivity extends AppCompatActivity {
         }
     }
 
-    private void excluirJogo(int position) {
+    private void excluirJogo() {
 
-        listaJogos.remove(position);
+        listaJogos.remove(posicaoSelecionada);
 
         jogoRecyclerViewAdapter.notifyDataSetChanged();
     }
@@ -243,12 +277,14 @@ public class JogosActivity extends AppCompatActivity {
                     }
 
                     posicaoSelecionada = -1;
+
+                    if (actionMode != null) {
+                        actionMode.finish();
+                    }
                 }
             });
 
-    private void editarJogo (int posicao) {
-
-        posicaoSelecionada = posicao;
+    private void editarJogo () {
 
         Jogo jogo = listaJogos.get(posicaoSelecionada);
 
@@ -276,6 +312,5 @@ public class JogosActivity extends AppCompatActivity {
         intentAbertura.putExtra(JogoActivity.KEY_TIPO_MIDIA, jogo.getTipoMidia().toString());
 
         launcherEditarJogo.launch(intentAbertura);
-
     }
 }
