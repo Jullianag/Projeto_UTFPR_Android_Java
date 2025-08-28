@@ -2,7 +2,9 @@ package br.edu.utfpr.colecaojogovideogame;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -16,6 +18,10 @@ import java.util.List;
 public class JogoRecyclerViewAdapter extends RecyclerView.Adapter<JogoRecyclerViewAdapter.JogoHolder> {
 
     private OnItemClickListener onItemClickListener;
+    private OnItemLongClickListener onItemLongClickListener;
+
+    private OnCreateContextMenu onCreateContextMenu;
+    private OnContextMenuClickListener onContextMenuClickListener;
 
     private Context context;
 
@@ -23,22 +29,40 @@ public class JogoRecyclerViewAdapter extends RecyclerView.Adapter<JogoRecyclerVi
 
     private String[] generos;
 
-    public interface OnItemClickListener {
+    interface OnItemClickListener {
 
         void onItemClick(View view, int position);
+    }
+
+    interface OnItemLongClickListener {
 
         void onItemLongClick(View view, int position);
     }
 
-    public JogoRecyclerViewAdapter(Context context, List<Jogo> listaJogos, OnItemClickListener listener) {
+    interface OnCreateContextMenu {
+
+        void onCreateContextMenu(ContextMenu menu,
+                                 View v,
+                                 ContextMenu.ContextMenuInfo menuInfo,
+                                 int position,
+                                 MenuItem.OnMenuItemClickListener meuItemClickListener);
+    }
+
+    interface OnContextMenuClickListener {
+
+        boolean onContextMenuItemClick(MenuItem menuItem, int position);
+    }
+
+    public JogoRecyclerViewAdapter(Context context, List<Jogo> listaJogos) {
         this.context = context;
         this.listaJogos = listaJogos;
-        this.onItemClickListener = listener;
 
         generos = context.getResources().getStringArray(R.array.generos);
     }
 
-    public class JogoHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+    public class JogoHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
+                                                                       View.OnLongClickListener,
+                                                                       View.OnCreateContextMenuListener {
 
         public TextView textViewValorNome;
         public TextView textViewValorAno;
@@ -57,33 +81,52 @@ public class JogoRecyclerViewAdapter extends RecyclerView.Adapter<JogoRecyclerVi
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
+            itemView.setOnCreateContextMenuListener(this);
         }
 
         @Override
         public void onClick(View v) {
 
             if (onItemClickListener != null) {
-                int pos = getAbsoluteAdapterPosition();
-
-                if (pos != RecyclerView.NO_POSITION) {
-                    onItemClickListener.onItemClick(v, pos);
+                onItemClickListener.onItemClick(v, getAbsoluteAdapterPosition());
                 }
             }
-        }
 
         @Override
         public boolean onLongClick(View v) {
 
-            if (onItemClickListener != null) {
-                int pos = getAbsoluteAdapterPosition();
-
-                if (pos != RecyclerView.NO_POSITION) {
-                    onItemClickListener.onItemLongClick(v, pos);
-                    return true;
-                }
+            if (onItemLongClickListener != null) {
+                onItemLongClickListener.onItemLongClick(v, getAbsoluteAdapterPosition());
+                return true;
             }
             return false;
         }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+
+            if (onCreateContextMenu != null) {
+                onCreateContextMenu.onCreateContextMenu(
+                        menu,
+                        v,
+                        menuInfo,
+                        getAbsoluteAdapterPosition(),
+                        onMenuItemClickListener);
+            }
+        }
+
+        MenuItem.OnMenuItemClickListener onMenuItemClickListener = new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+
+                if (onContextMenuClickListener != null) {
+                    onContextMenuClickListener.onContextMenuItemClick(item, getAbsoluteAdapterPosition());
+                    return true;
+                }
+
+                return false;
+            }
+        };
     }
 
     @NonNull
@@ -137,5 +180,37 @@ public class JogoRecyclerViewAdapter extends RecyclerView.Adapter<JogoRecyclerVi
     @Override
     public int getItemCount() {
         return listaJogos.size();
+    }
+
+    public OnItemClickListener getOnItemClickListener() {
+        return onItemClickListener;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public OnItemLongClickListener getOnItemLongClickListener() {
+        return onItemLongClickListener;
+    }
+
+    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
+        this.onItemLongClickListener = onItemLongClickListener;
+    }
+
+    public OnCreateContextMenu getOnCreateContextMenu() {
+        return onCreateContextMenu;
+    }
+
+    public void setOnCreateContextMenu(OnCreateContextMenu onCreateContextMenu) {
+        this.onCreateContextMenu = onCreateContextMenu;
+    }
+
+    public OnContextMenuClickListener getOnContextMenuClickListener() {
+        return onContextMenuClickListener;
+    }
+
+    public void setOnContextMenuClickListener(OnContextMenuClickListener onContextMenuClickListener) {
+        this.onContextMenuClickListener = onContextMenuClickListener;
     }
 }

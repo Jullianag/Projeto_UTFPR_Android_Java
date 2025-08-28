@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -27,19 +28,23 @@ public class JogoActivity extends AppCompatActivity {
     public static final String KEY_CONSOLES = "KEY_CONSOLES";
     public static final String KEY_GENERO = "KEY_GENERO";
     public static final String KEY_TIPO_MIDIA = "KEY_TIPO_MIDIA";
+    public static final String KEY_MODO = "MODO";
+
+    public static final int MODO_NOVO = 0;
+    public static final int MODO_EDITAR = 1;
 
     private EditText editTextNome, editTextAno;
     private CheckBox checkBoxPlay, checkBoxXBox, checkBoxSwitch;
-    private RadioGroup radioGroupTipoMidia;
-
     private Spinner spinnerGenero;
+    private RadioGroup radioGroupTipoMidia;
+    private RadioButton radioButtonFisica, radioButtonDigital;
+
+    private int modo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jogo);
-
-        setTitle(getString(R.string.novo_jogo));
 
         editTextNome = findViewById(R.id.editTextNome);
         editTextAno = findViewById(R.id.editTextAno);
@@ -48,6 +53,52 @@ public class JogoActivity extends AppCompatActivity {
         checkBoxSwitch = findViewById(R.id.checkBoxSwitch);
         radioGroupTipoMidia = findViewById(R.id.radioGroupTipoMidia);
         spinnerGenero = findViewById(R.id.spinnerGenero);
+        radioButtonFisica = findViewById(R.id.radioButtonFisica);
+        radioButtonDigital = findViewById(R.id.radioButtonDigital);
+
+        Intent intentAbertuta = getIntent();
+
+        Bundle bundle = intentAbertuta.getExtras();
+
+        if (bundle != null) {
+
+            modo = bundle.getInt(KEY_MODO);
+
+            if (modo == MODO_NOVO) {
+                setTitle(getString(R.string.novo_jogo));
+            } else {
+                setTitle(getString(R.string.editar_jogo));
+
+                String nome = bundle.getString(JogoActivity.KEY_NOME);
+                int ano = bundle.getInt(JogoActivity.KEY_ANO);
+                ArrayList<String> consoles = bundle.getStringArrayList(JogoActivity.KEY_CONSOLES);
+                int genero = bundle.getInt(JogoActivity.KEY_GENERO);
+                String tipoMidiaTexto = bundle.getString(JogoActivity.KEY_TIPO_MIDIA);
+
+                boolean playstation = consoles != null && consoles.contains(getString(R.string.playstation));
+                boolean xBox = consoles != null && consoles.contains(getString(R.string.xbox));
+                boolean nintendoSwitch = consoles != null && consoles.contains(getString(R.string.nintendo_switch));
+
+                TipoMidia tipoMidia = TipoMidia.valueOf(tipoMidiaTexto);
+
+                editTextNome.setText(nome);
+                editTextAno.setText(String.valueOf(ano));
+                checkBoxPlay.setChecked(playstation);
+                checkBoxXBox.setChecked(xBox);
+                checkBoxSwitch.setChecked(nintendoSwitch);
+                spinnerGenero.setSelection(genero);
+
+                if (tipoMidia == TipoMidia.Fisica) {
+                    radioButtonFisica.setChecked(true);
+
+                } else {
+                    if (tipoMidia == TipoMidia.Digital) {
+                        radioButtonDigital.setChecked(true);
+                    }
+                }
+
+            }
+        }
     }
 
     public void limparCampos() {

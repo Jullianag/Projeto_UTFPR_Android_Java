@@ -53,4 +53,7 @@
     <string name="escolha_o_app_de_e_mail">Escolha o app de e-mail</string>
     <string name="abrir_link_com">Abrir link com</string>
     <string name="recebeu_um_click_longo">\"\n recebeu um click longo!</string>
+    <string name="editar">Editar</string>
+    <string name="excluir">Excluir</string>
+    <string name="editar_jogo">Editar Jogo</string>
 </resources>
