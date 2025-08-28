@@ -1,6 +1,17 @@
 package br.edu.utfpr.colecaojogovideogame;
 
+import java.util.Comparator;
+
 public class Jogo {
+
+    public static Comparator<Jogo> ordenacaoCrescente = new Comparator<Jogo>() {
+
+        @Override
+        public int compare(Jogo jogo1, Jogo jogo2) {
+
+            return jogo1.getNome().compareToIgnoreCase(jogo2.getNome());
+        }
+    };
 
     private String nome;
 

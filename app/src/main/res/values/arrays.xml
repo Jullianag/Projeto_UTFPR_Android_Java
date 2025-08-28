@@ -2,12 +2,12 @@
 <resources>
     
     <string-array name="generos">
-        <item>@string/puzzle</item>
         <item>@string/acao_aventura</item>
         <item>@string/corrida</item>
-        <item>@string/estrategia</item>
-        <item>@string/rpg</item>
         <item>@string/esporte</item>
+        <item>@string/estrategia</item>
+        <item>@string/puzzle</item>
+        <item>@string/rpg</item>
     </string-array>
 
     <string-array name="jogos_nome">

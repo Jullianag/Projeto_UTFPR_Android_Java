@@ -60,4 +60,18 @@ public class SobreActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
         }
     }
+
+    // código para usar o back do sistema, sem modificar o AndroidManifest para "singleTask"
+    /*@Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int idMenuItem = item.getItemId();
+
+        if (idMenuItem == android.R.id.home) {
+            finish();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+    }*/
 }

@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class JogosActivity extends AppCompatActivity {
@@ -187,6 +188,8 @@ public class JogosActivity extends AppCompatActivity {
 
                             listaJogos.add(jogo);
 
+                            Collections.sort(listaJogos, Jogo.ordenacaoCrescente);
+
                             jogoRecyclerViewAdapter.notifyDataSetChanged();
                         }
                     }
@@ -271,6 +274,8 @@ public class JogosActivity extends AppCompatActivity {
 
                             TipoMidia tipoMidia = TipoMidia.valueOf(tipoMidiaTexto);
                             jogo.setTipoMidia(tipoMidia);
+
+                            Collections.sort(listaJogos, Jogo.ordenacaoCrescente);
 
                             jogoRecyclerViewAdapter.notifyDataSetChanged();
                         }
