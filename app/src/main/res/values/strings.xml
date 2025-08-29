@@ -56,4 +56,6 @@
     <string name="editar">Editar</string>
     <string name="excluir">Excluir</string>
     <string name="editar_jogo">Editar Jogo</string>
+    <string name="sugerir_tipo">Sugerir Tipo</string>
+    <string name="sugerir_genero">Sugerir Gênero</string>
 </resources>

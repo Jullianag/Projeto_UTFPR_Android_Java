@@ -1,6 +1,8 @@
 package br.edu.utfpr.colecaojogovideogame;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -30,6 +32,9 @@ public class JogoActivity extends AppCompatActivity {
     public static final String KEY_TIPO_MIDIA = "KEY_TIPO_MIDIA";
     public static final String KEY_MODO = "MODO";
 
+    public static final String KEY_SUGERIR_GENERO = "SUGERIR_GENERO";
+    public static final String KEY_ULTIMO_GENERO = "ULTIMO_GENERO";
+
     public static final int MODO_NOVO = 0;
     public static final int MODO_EDITAR = 1;
 
@@ -41,6 +46,9 @@ public class JogoActivity extends AppCompatActivity {
 
     private int modo;
     private Jogo jogoOriginal;
+
+    private boolean sugerirGenero = false;
+    private int ultimoGenero = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +65,8 @@ public class JogoActivity extends AppCompatActivity {
         radioButtonFisica = findViewById(R.id.radioButtonFisica);
         radioButtonDigital = findViewById(R.id.radioButtonDigital);
 
+        lerPreferencias();
+
         Intent intentAbertuta = getIntent();
 
         Bundle bundle = intentAbertuta.getExtras();
@@ -67,6 +77,12 @@ public class JogoActivity extends AppCompatActivity {
 
             if (modo == MODO_NOVO) {
                 setTitle(getString(R.string.novo_jogo));
+
+                if (sugerirGenero) {
+
+                    spinnerGenero.setSelection(ultimoGenero);
+                }
+
             } else {
                 setTitle(getString(R.string.editar_jogo));
 
@@ -254,6 +270,8 @@ public class JogoActivity extends AppCompatActivity {
             return;
         }
 
+        salvarUltimoTipo(genero);
+
         Intent intentResposta = new Intent();
 
         intentResposta.putExtra(KEY_NOME, nome);
@@ -275,6 +293,16 @@ public class JogoActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        MenuItem item = menu.findItem(R.id.menuItemSugerirGenero);
+
+        item.setChecked(sugerirGenero);
+
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         int idMenuItem = item.getItemId();
@@ -289,8 +317,60 @@ public class JogoActivity extends AppCompatActivity {
                 limparCampos();
                 return true;
             } else {
-                return super.onOptionsItemSelected(item);
+
+                if (idMenuItem == R.id.menuItemSugerirGenero) {
+
+                    boolean valor = !item.isChecked();
+
+                    salvarSugerirTipo(valor);
+                    item.setChecked(valor);
+
+                    if (sugerirGenero) {
+                        spinnerGenero.setSelection(ultimoGenero);
+                    }
+
+                    return true;
+                } else {
+                    return super.onOptionsItemSelected(item);
+                }
             }
         }
+    }
+
+    private void lerPreferencias() {
+
+        SharedPreferences shared = getSharedPreferences(JogosActivity.ARQUIVO_PREFERENCIAS,
+                Context.MODE_PRIVATE);
+
+        sugerirGenero = shared.getBoolean(KEY_SUGERIR_GENERO, sugerirGenero);
+        ultimoGenero = shared.getInt(KEY_ULTIMO_GENERO, ultimoGenero);
+    }
+
+    private void salvarSugerirTipo(boolean novoValor) {
+
+        SharedPreferences shared = getSharedPreferences(JogosActivity.ARQUIVO_PREFERENCIAS,
+                Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = shared.edit();
+
+        editor.putBoolean(KEY_SUGERIR_GENERO, novoValor);
+
+        editor.commit();
+
+        sugerirGenero = novoValor;
+    }
+
+    private void salvarUltimoTipo(int novoValor) {
+
+        SharedPreferences shared = getSharedPreferences(JogosActivity.ARQUIVO_PREFERENCIAS,
+                Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = shared.edit();
+
+        editor.putInt(KEY_ULTIMO_GENERO, novoValor);
+
+        editor.commit();
+
+        ultimoGenero = novoValor;
     }
 }

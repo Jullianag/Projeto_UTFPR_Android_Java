@@ -12,4 +12,8 @@
         android:icon="@drawable/ic_action_name"
         android:title="@string/limpar"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menuItemSugerirGenero"
+        android:checkable="true"
+        android:title="@string/sugerir_genero" />
 </menu>
