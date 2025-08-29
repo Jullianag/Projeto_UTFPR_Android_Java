@@ -1,6 +1,8 @@
 package br.edu.utfpr.colecaojogovideogame;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -41,6 +44,14 @@ public class JogosActivity extends AppCompatActivity {
     private Drawable backgroundDrawable;
 
     public static final String ARQUIVO_PREFERENCIAS = "br.edu.utfpr.colecaojogovideogame.PREFERENCIAS";
+
+    public static final String KEY_ORDENACAO_ASCENDENTE = "ORDENACAO_ASCENDENTE";
+
+    public static final boolean PADRAO_INICIAL_ORDENACAO_ASCENDENTE = true;
+
+    private boolean ordenacaoAscendente = PADRAO_INICIAL_ORDENACAO_ASCENDENTE;
+
+    private MenuItem menuItemOrdenacao;
 
     private ActionMode.Callback actionModeCallback = new ActionMode.Callback() {
 
@@ -107,6 +118,7 @@ public class JogosActivity extends AppCompatActivity {
         recyclerViewJogos.setHasFixedSize(true);
         recyclerViewJogos.addItemDecoration(new DividerItemDecoration(this, LinearLayout.VERTICAL));
 
+        lerPreferencias();
         popularListaJogos();
     }
 
@@ -190,9 +202,7 @@ public class JogosActivity extends AppCompatActivity {
 
                             listaJogos.add(jogo);
 
-                            Collections.sort(listaJogos, Jogo.ordenacaoCrescente);
-
-                            jogoRecyclerViewAdapter.notifyDataSetChanged();
+                            ordenarLista();
                         }
                     }
                 }
@@ -211,6 +221,17 @@ public class JogosActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.jogos_opcoes, menu);
+
+        menuItemOrdenacao = menu.findItem(R.id.menuItemOrdenacao);
+
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        atualizarIconeOrdenacao();
+
         return true;
     }
 
@@ -229,7 +250,31 @@ public class JogosActivity extends AppCompatActivity {
                 return  true;
 
             } else {
-                return super.onOptionsItemSelected(item);
+
+                if (idMenuItem == R.id.menuItemOrdenacao) {
+
+                    salvarPreferenciaOrdenacaoAscendente(!ordenacaoAscendente);
+                    atualizarIconeOrdenacao();
+                    ordenarLista();
+                    return true;
+
+                } else {
+
+                    if (idMenuItem == R.id.menuItemRestaurar) {
+                        restaurarPadroes();
+                        atualizarIconeOrdenacao();
+                        ordenarLista();
+
+                        Toast.makeText(this,
+                                R.string.as_configuracoes_voltaram_para_o_padrao_de_instalacao,
+                                Toast.LENGTH_LONG).show();
+
+                        return true;
+
+                    } else {
+                        return super.onOptionsItemSelected(item);
+                    }
+                }
             }
         }
     }
@@ -277,9 +322,7 @@ public class JogosActivity extends AppCompatActivity {
                             TipoMidia tipoMidia = TipoMidia.valueOf(tipoMidiaTexto);
                             jogo.setTipoMidia(tipoMidia);
 
-                            Collections.sort(listaJogos, Jogo.ordenacaoCrescente);
-
-                            jogoRecyclerViewAdapter.notifyDataSetChanged();
+                            ordenarLista();
                         }
                     }
 
@@ -319,5 +362,60 @@ public class JogosActivity extends AppCompatActivity {
         intentAbertura.putExtra(JogoActivity.KEY_TIPO_MIDIA, jogo.getTipoMidia().toString());
 
         launcherEditarJogo.launch(intentAbertura);
+    }
+
+    private void ordenarLista() {
+
+        if (ordenacaoAscendente) {
+
+            Collections.sort(listaJogos, Jogo.ordenacaoCrescente);
+        } else {
+
+            Collections.sort(listaJogos, Jogo.ordenacaoDecrescente);
+        }
+
+        jogoRecyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    private void atualizarIconeOrdenacao() {
+
+        if (ordenacaoAscendente) {
+            menuItemOrdenacao.setIcon(R.drawable.ic_action_ascending_order);
+        } else {
+            menuItemOrdenacao.setIcon(R.drawable.ic_action_descending_order);
+        }
+    }
+
+    private void lerPreferencias() {
+
+        SharedPreferences shared = getSharedPreferences(ARQUIVO_PREFERENCIAS, Context.MODE_PRIVATE);
+
+        ordenacaoAscendente = shared.getBoolean(KEY_ORDENACAO_ASCENDENTE, ordenacaoAscendente);
+    }
+
+    private void salvarPreferenciaOrdenacaoAscendente(boolean novoValor) {
+
+        SharedPreferences shared = getSharedPreferences(ARQUIVO_PREFERENCIAS, Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = shared.edit();
+
+        editor.putBoolean(KEY_ORDENACAO_ASCENDENTE, novoValor);
+
+        editor.commit();
+
+        ordenacaoAscendente = novoValor;
+    }
+
+    private void restaurarPadroes() {
+
+        SharedPreferences shared = getSharedPreferences(ARQUIVO_PREFERENCIAS, Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = shared.edit();
+
+        editor.clear();
+
+        editor.commit();
+
+        ordenacaoAscendente = PADRAO_INICIAL_ORDENACAO_ASCENDENTE;
     }
 }

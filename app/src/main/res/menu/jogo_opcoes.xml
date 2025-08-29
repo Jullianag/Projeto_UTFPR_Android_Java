@@ -9,7 +9,7 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menuItemLimpar"
-        android:icon="@drawable/ic_action_name"
+        android:icon="@drawable/ic_action_clear"
         android:title="@string/limpar"
         app:showAsAction="ifRoom" />
     <item

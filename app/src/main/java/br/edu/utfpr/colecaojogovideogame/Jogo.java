@@ -13,6 +13,15 @@ public class Jogo {
         }
     };
 
+    public static Comparator<Jogo> ordenacaoDecrescente = new Comparator<Jogo>() {
+
+        @Override
+        public int compare(Jogo jogo1, Jogo jogo2) {
+
+            return -1 * jogo1.getNome().compareToIgnoreCase(jogo2.getNome());
+        }
+    };
+
     private String nome;
 
     private int ano;

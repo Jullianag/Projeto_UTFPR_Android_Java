@@ -58,4 +58,7 @@
     <string name="editar_jogo">Editar Jogo</string>
     <string name="sugerir_tipo">Sugerir Tipo</string>
     <string name="sugerir_genero">Sugerir Gênero</string>
+    <string name="ordenacao">Ordenação</string>
+    <string name="restaurar_padroes">Restaurar Padrões</string>
+    <string name="as_configuracoes_voltaram_para_o_padrao_de_instalacao">As configurações voltaram para o padrão de instalação!</string>
 </resources>
