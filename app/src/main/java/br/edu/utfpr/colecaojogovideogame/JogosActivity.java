@@ -1,9 +1,9 @@
 package br.edu.utfpr.colecaojogovideogame;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,6 +27,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import br.edu.utfpr.colecaojogovideogame.utils.UtilsAlert;
 
 public class JogosActivity extends AppCompatActivity {
 
@@ -80,7 +82,6 @@ public class JogosActivity extends AppCompatActivity {
 
                 if (idMenuItem == R.id.menuItemExcluir) {
                     excluirJogo();
-                    mode.finish();
                     return true;
                 } else {
                     return false;
@@ -151,7 +152,7 @@ public class JogosActivity extends AppCompatActivity {
                 viewSelecionada = view;
                 backgroundDrawable = view.getBackground();
 
-                view.setBackgroundColor(Color.LTGRAY);
+                view.setBackgroundColor(getColor(R.color.corSelecionado));
 
                 recyclerViewJogos.setEnabled(false);
 
@@ -261,14 +262,7 @@ public class JogosActivity extends AppCompatActivity {
                 } else {
 
                     if (idMenuItem == R.id.menuItemRestaurar) {
-                        restaurarPadroes();
-                        atualizarIconeOrdenacao();
-                        ordenarLista();
-
-                        Toast.makeText(this,
-                                R.string.as_configuracoes_voltaram_para_o_padrao_de_instalacao,
-                                Toast.LENGTH_LONG).show();
-
+                        confirmarRestaurarPadroes();
                         return true;
 
                     } else {
@@ -281,9 +275,25 @@ public class JogosActivity extends AppCompatActivity {
 
     private void excluirJogo() {
 
-        listaJogos.remove(posicaoSelecionada);
+        Jogo jogo = listaJogos.get(posicaoSelecionada);
 
-        jogoRecyclerViewAdapter.notifyDataSetChanged();
+        // String mensagem = getString(R.string.deseja_apagar) + jogo.getNome() + "\"";
+
+        String mensagem = getString(R.string.deseja_apagar, jogo.getNome());
+
+        DialogInterface.OnClickListener listenerSim = new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                listaJogos.remove(posicaoSelecionada);
+                // jogoRecyclerViewAdapter.notifyDataSetChanged();
+                jogoRecyclerViewAdapter.notifyItemRemoved(posicaoSelecionada);
+                actionMode.finish();
+            }
+        };
+
+        UtilsAlert.confirmarAcao(this, mensagem, listenerSim, null);
+
     }
 
     ActivityResultLauncher<Intent> launcherEditarJogo = registerForActivityResult(
@@ -404,6 +414,26 @@ public class JogosActivity extends AppCompatActivity {
         editor.commit();
 
         ordenacaoAscendente = novoValor;
+    }
+
+    private void confirmarRestaurarPadroes() {
+
+        DialogInterface.OnClickListener listenerSim = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                restaurarPadroes();
+                atualizarIconeOrdenacao();
+                ordenarLista();
+
+                Toast.makeText(JogosActivity.this,
+                        R.string.as_configuracoes_voltaram_para_o_padrao_de_instalacao,
+                        Toast.LENGTH_LONG).show();
+            }
+        };
+
+        UtilsAlert.confirmarAcao(this, R.string.deseja_voltar_padroes,
+                listenerSim, null);
     }
 
     private void restaurarPadroes() {

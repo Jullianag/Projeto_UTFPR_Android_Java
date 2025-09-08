@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import br.edu.utfpr.colecaojogovideogame.utils.UtilsAlert;
+
 public class JogoActivity extends AppCompatActivity {
 
     public static final String KEY_NOME = "KEY_NOME";
@@ -144,9 +146,8 @@ public class JogoActivity extends AppCompatActivity {
 
         if (nome == null || nome.trim().isEmpty()) {
 
-            Toast.makeText(this,
-                    R.string.o_nome_nao_pode_ser_vazio,
-                    Toast.LENGTH_LONG).show();
+            UtilsAlert.mostrarAviso(this,
+                    R.string.o_nome_nao_pode_ser_vazio);
 
             editTextNome.requestFocus();
             return;
@@ -158,9 +159,8 @@ public class JogoActivity extends AppCompatActivity {
 
         if (anoString == null || anoString.trim().isEmpty()) {
 
-            Toast.makeText(this,
-                    R.string.o_ano_nao_pode_ser_vazio,
-                    Toast.LENGTH_LONG).show();
+            UtilsAlert.mostrarAviso(this,
+                    R.string.o_ano_nao_pode_ser_vazio);
 
             editTextAno.requestFocus();
             return;
@@ -173,9 +173,8 @@ public class JogoActivity extends AppCompatActivity {
 
         } catch (NumberFormatException e) {
 
-            Toast.makeText(this,
-                    R.string.o_ano_deve_ser_um_numero_inteiro,
-                    Toast.LENGTH_LONG).show();
+            UtilsAlert.mostrarAviso(this,
+                    R.string.o_ano_deve_ser_um_numero_inteiro);
 
             editTextAno.requestFocus();
             editTextAno.setSelection(0, editTextAno.getText().toString().length());
@@ -189,15 +188,14 @@ public class JogoActivity extends AppCompatActivity {
             anoAtual = LocalDate.now().getYear();
         }
         else {
-            // tive que usar o Calendar, pois o andoid nao aceitava o LocalDate
+            // tive que usar o Calendar, pois o android nao aceitava o LocalDate
             anoAtual = Calendar.getInstance().get(Calendar.YEAR);
         }
 
         if (ano < 1972 || ano > anoAtual) {
 
-            Toast.makeText(this,
-                    R.string.o_ano_deve_estar_entre_1972_e_o_ano_atual,
-                    Toast.LENGTH_LONG).show();
+            UtilsAlert.mostrarAviso(this,
+                    R.string.o_ano_deve_estar_entre_1972_e_o_ano_atual);
 
             editTextAno.requestFocus();
             editTextAno.setSelection(0, editTextAno.getText().toString().length());
@@ -209,9 +207,10 @@ public class JogoActivity extends AppCompatActivity {
         boolean switchConsole = checkBoxSwitch.isChecked();
 
         if (!playstationConsole && !xBoxConsole && !switchConsole) {
-            Toast.makeText(this,
-                    R.string.deve_ser_marcado_pelo_menos_um_console,
-                    Toast.LENGTH_LONG).show();
+
+            UtilsAlert.mostrarAviso(this,
+                    R.string.deve_ser_marcado_pelo_menos_um_console);
+
             return;
         }
 
@@ -239,9 +238,8 @@ public class JogoActivity extends AppCompatActivity {
             if (radioButtonId == R.id.radioButtonDigital) {
                 tipoMidia = TipoMidia.Digital;
             } else {
-                Toast.makeText(this,
-                        R.string.e_obrigatorio_o_tipo_de_midia,
-                        Toast.LENGTH_LONG).show();
+                UtilsAlert.mostrarAviso(this,
+                        R.string.e_obrigatorio_o_tipo_de_midia);
 
                 return;
             }
@@ -250,9 +248,9 @@ public class JogoActivity extends AppCompatActivity {
         int genero = spinnerGenero.getSelectedItemPosition();
 
         if (genero == AdapterView.INVALID_POSITION) {
-            Toast.makeText(this,
-                    R.string.o_spinner_nao_possui_valores,
-                    Toast.LENGTH_LONG).show();
+
+            UtilsAlert.mostrarAviso(this,
+                    R.string.o_spinner_nao_possui_valores);
 
             return;
         }

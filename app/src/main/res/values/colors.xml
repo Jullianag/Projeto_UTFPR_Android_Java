@@ -5,6 +5,7 @@
     <color name="amarelo">#FFBE02</color>
     <color name="amarelo_escuro">#B9BA9506</color>
     <color name="cinza_escuro">#AAAAAA</color>
-
     <color name="azul_escuro">#3F51B5</color>
+    <color name="cinza_transparente">#C8808080</color>
+    <color name="amarelo_transparente">#9AEBB80D</color>
 </resources>

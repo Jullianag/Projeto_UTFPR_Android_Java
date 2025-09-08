@@ -8,4 +8,6 @@
 
         <item name="android:textColorLink">@color/azul_escuro</item>
     </style>
+
+    <color name="corSelecionado">@color/amarelo_transparente</color>
 </resources>

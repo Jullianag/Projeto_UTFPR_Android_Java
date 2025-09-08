@@ -55,4 +55,11 @@
     <string name="restaurar_padroes">Restaurar Padrões</string>
     <string name="as_configuracoes_voltaram_para_o_padrao_de_instalacao">As configurações voltaram para o padrão de instalação!</string>
     <string name="nome_utfpr_por_extenso">UNIVERSIDADE TECNOLÓGICA FEDERAL DO PARANÁ</string>
+    <string name="aviso">Aviso</string>
+    <string name="ok">Ok</string>
+    <string name="confirmacao">Confirmação</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="deseja_apagar">Deseja realmente apagar?\n\"%1s\"</string>
+    <string name="deseja_voltar_padroes">Deseja restaurar padrões?</string>
 </resources>

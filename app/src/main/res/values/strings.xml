@@ -58,5 +58,11 @@
     <string name="puzzle">Puzzle</string>
     <string name="jogo_video_game">Video Games</string>
     <string name="nome_utfpr_por_extenso">FEDERAL UNIVERSITY OF TECNOLOGY - PARANÁ</string>
-    <string name="ordenacao_ano">Ordenação Ano</string>
+    <string name="aviso">Warning</string>
+    <string name="ok">OK</string>
+    <string name="confirmacao">Confirmation</string>
+    <string name="sim">Yes</string>
+    <string name="nao">No</string>
+    <string name="deseja_apagar">Do you want to delete?\n\"%1$s\"</string>
+    <string name="deseja_voltar_padroes">Do you want to restore defaults?</string>
 </resources>
