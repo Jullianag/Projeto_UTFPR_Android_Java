@@ -18,11 +18,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:labelFor="@id/editTextNome"
             android:text="@string/nome"
             app:layout_constraintEnd_toStartOf="@+id/editTextNome"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,53 +32,51 @@
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:ems="10"
             android:hint="@string/nome_jogo"
             android:inputType="text|textCapWords"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textViewNome"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewNome" />
 
         <TextView
             android:id="@+id/textViewAno"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="16dp"
             android:labelFor="@id/editTextAno"
             android:text="@string/ano_lancamento"
             app:layout_constraintEnd_toStartOf="@+id/editTextAno"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewNome" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextNome" />
 
         <EditText
             android:id="@+id/editTextAno"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:ems="10"
             android:hint="@string/ano_lancamento_valor"
             android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textViewAno"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNome" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewAno" />
 
         <TextView
             android:id="@+id/textViewConsole"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:labelFor="@id/checkBoxPlay"
             android:text="@string/console"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewAno" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextAno" />
 
         <CheckBox
             android:id="@+id/checkBoxPlay"
@@ -118,7 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:labelFor="@id/radioGroupTipoMidia"
             android:text="@string/tipo_midia"
             app:layout_constraintStart_toStartOf="parent"

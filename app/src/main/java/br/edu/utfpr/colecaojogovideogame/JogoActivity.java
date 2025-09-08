@@ -81,6 +81,7 @@ public class JogoActivity extends AppCompatActivity {
                 if (sugerirGenero) {
 
                     spinnerGenero.setSelection(ultimoGenero);
+
                 }
 
             } else {
