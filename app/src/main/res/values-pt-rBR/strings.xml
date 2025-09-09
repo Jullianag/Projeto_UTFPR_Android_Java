@@ -62,4 +62,7 @@
     <string name="nao">Não</string>
     <string name="deseja_apagar">Deseja realmente apagar?\n\"%1s\"</string>
     <string name="deseja_voltar_padroes">Deseja restaurar padrões?</string>
+    <string name="desfazer">Desfazer</string>
+    <string name="alteracao_realizada">Atualização de dados feita</string>
+    <string name="erro_de_conversao_de_tipo">Erro de conversão de tipo!</string>
 </resources>

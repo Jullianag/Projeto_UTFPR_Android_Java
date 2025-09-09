@@ -20,9 +20,12 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -320,7 +323,20 @@ public class JogosActivity extends AppCompatActivity {
                             boolean xBox = consoles != null && consoles.contains(getString(R.string.xbox));
                             boolean nintendoSwitch = consoles != null && consoles.contains(getString(R.string.nintendo_switch));
 
-                            Jogo jogo = listaJogos.get(posicaoSelecionada);
+                            final Jogo jogo = listaJogos.get(posicaoSelecionada);
+
+                            final Jogo cloneJogoOriginal;
+
+                            try {
+                                cloneJogoOriginal = (Jogo) jogo.clone();
+
+                            } catch (CloneNotSupportedException e) {
+                                e.printStackTrace();
+                                UtilsAlert.mostrarAviso(JogosActivity.this,
+                                        R.string.erro_de_conversao_de_tipo);
+
+                                return;
+                            }
 
                             jogo.setNome(nome);
                             jogo.setAno(ano);
@@ -333,6 +349,26 @@ public class JogosActivity extends AppCompatActivity {
                             jogo.setTipoMidia(tipoMidia);
 
                             ordenarLista();
+
+                            final ConstraintLayout constraintLayout = findViewById(R.id.main);
+
+                            Snackbar snackbar = Snackbar.make(constraintLayout,
+                                    R.string.alteracao_realizada,
+                                    Snackbar.LENGTH_LONG);
+
+                            snackbar.setAction(R.string.desfazer, new View.OnClickListener() {
+
+                                @Override
+                                public void onClick(View v) {
+
+                                    listaJogos.remove(jogo);
+                                    listaJogos.add(cloneJogoOriginal);
+
+                                    ordenarLista();
+                                }
+                            });
+
+                            snackbar.show();
                         }
                     }
 

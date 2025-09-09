@@ -7,16 +7,19 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -125,6 +128,17 @@ public class JogoActivity extends AppCompatActivity {
 
     public void limparCampos() {
 
+        final String nome = editTextNome.getText().toString();
+        final String ano = editTextAno.getText().toString();
+        final boolean playstation = checkBoxPlay.isChecked();
+        final boolean xBox = checkBoxXBox.isChecked();
+        final boolean nintendoSwitch = checkBoxSwitch.isChecked();
+        final int radioButtonId = radioGroupTipoMidia.getCheckedRadioButtonId();
+        final int genero = spinnerGenero.getSelectedItemPosition();
+
+        final ScrollView scrollView = findViewById(R.id.main);
+        final View viewComFoco = scrollView.findFocus();
+
         editTextNome.setText(null);
         editTextAno.setText(null);
         checkBoxPlay.setChecked(false);
@@ -135,9 +149,40 @@ public class JogoActivity extends AppCompatActivity {
 
         editTextNome.requestFocus();
 
-        Toast.makeText(this,
+        Snackbar snackbar = Snackbar.make(scrollView,
                 R.string.entradas_apagadas,
-                Toast.LENGTH_LONG).show();
+                Snackbar.LENGTH_LONG);
+
+        snackbar.setAction(R.string.desfazer, new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                editTextNome.setText(nome);
+                editTextAno.setText(ano);
+                checkBoxPlay.setChecked(playstation);
+                checkBoxXBox.setChecked(xBox);
+                checkBoxSwitch.setChecked(nintendoSwitch);
+
+                if (radioButtonId == R.id.radioButtonFisica) {
+                    radioButtonFisica.setChecked(true);
+
+                } else {
+                    if (radioButtonId == R.id.radioButtonDigital) {
+                        radioButtonDigital.setChecked(true);
+                    }
+                }
+
+                spinnerGenero.setSelection(genero);
+
+                if (viewComFoco != null) {
+                    viewComFoco.requestFocus();
+                }
+            }
+        });
+
+        snackbar.show();
+
     }
 
     public void salvarValores() {

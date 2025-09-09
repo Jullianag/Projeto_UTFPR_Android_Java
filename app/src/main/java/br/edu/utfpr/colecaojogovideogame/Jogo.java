@@ -1,8 +1,10 @@
 package br.edu.utfpr.colecaojogovideogame;
 
+import androidx.annotation.NonNull;
+
 import java.util.Comparator;
 
-public class Jogo {
+public class Jogo implements Cloneable {
 
     public static Comparator<Jogo> ordenacaoCrescente = new Comparator<Jogo>() {
 
@@ -100,6 +102,17 @@ public class Jogo {
 
     public void setTipoMidia(TipoMidia tipoMidia) {
         this.tipoMidia = tipoMidia;
+    }
+
+    @NonNull
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+
+        /* Como esta classe só tem atributos primitivos ou imutáveis.
+           O método clone() da plasse pai já resolve.
+         */
+
+        return super.clone();
     }
 
     @Override
