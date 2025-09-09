@@ -1,4 +1,4 @@
-package br.edu.utfpr.colecaojogovideogame;
+package br.edu.utfpr.colecaojogovideogame.modelo;
 
 public enum TipoMidia {
 

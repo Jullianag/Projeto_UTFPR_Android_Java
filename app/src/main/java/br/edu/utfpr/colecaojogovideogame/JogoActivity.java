@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import br.edu.utfpr.colecaojogovideogame.modelo.Jogo;
+import br.edu.utfpr.colecaojogovideogame.modelo.TipoMidia;
 import br.edu.utfpr.colecaojogovideogame.utils.UtilsAlert;
 
 public class JogoActivity extends AppCompatActivity {

@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.utfpr.colecaojogovideogame.modelo.Jogo;
+
 public class JogoRecyclerViewAdapter extends RecyclerView.Adapter<JogoRecyclerViewAdapter.JogoHolder> {
 
     private OnItemClickListener onItemClickListener;

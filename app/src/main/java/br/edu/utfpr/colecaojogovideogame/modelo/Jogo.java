@@ -1,9 +1,13 @@
-package br.edu.utfpr.colecaojogovideogame;
+package br.edu.utfpr.colecaojogovideogame.modelo;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.util.Comparator;
 
+@Entity
 public class Jogo implements Cloneable {
 
     public static Comparator<Jogo> ordenacaoCrescente = new Comparator<Jogo>() {
@@ -24,6 +28,11 @@ public class Jogo implements Cloneable {
         }
     };
 
+    @PrimaryKey(autoGenerate = true)
+    private long id;
+
+    @NonNull
+    @ColumnInfo(index = true)
     private String nome;
 
     private int ano;
@@ -46,6 +55,14 @@ public class Jogo implements Cloneable {
         this.nintendoSwitch = nintendoSwitch;
         this.genero = genero;
         this.tipoMidia = tipoMidia;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -106,7 +123,7 @@ public class Jogo implements Cloneable {
 
     @NonNull
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    public Object clone() throws CloneNotSupportedException {
 
         /* Como esta classe só tem atributos primitivos ou imutáveis.
            O método clone() da plasse pai já resolve.
