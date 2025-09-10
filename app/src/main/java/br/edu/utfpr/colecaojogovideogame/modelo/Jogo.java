@@ -6,6 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 @Entity
 public class Jogo implements Cloneable {
@@ -130,6 +131,24 @@ public class Jogo implements Cloneable {
          */
 
         return super.clone();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Jogo jogo = (Jogo) o;
+        return ano == jogo.ano &&
+                playstation == jogo.playstation &&
+                xbox == jogo.xbox &&
+                nintendoSwitch == jogo.nintendoSwitch &&
+                genero == jogo.genero &&
+                nome.equals(jogo.nome) &&
+                tipoMidia == jogo.tipoMidia;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome, ano, playstation, xbox, nintendoSwitch, genero, tipoMidia);
     }
 
     @Override

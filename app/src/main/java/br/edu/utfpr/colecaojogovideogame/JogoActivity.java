@@ -28,16 +28,19 @@ import java.util.List;
 
 import br.edu.utfpr.colecaojogovideogame.modelo.Jogo;
 import br.edu.utfpr.colecaojogovideogame.modelo.TipoMidia;
+import br.edu.utfpr.colecaojogovideogame.persistencia.JogosDatabase;
 import br.edu.utfpr.colecaojogovideogame.utils.UtilsAlert;
 
 public class JogoActivity extends AppCompatActivity {
 
-    public static final String KEY_NOME = "KEY_NOME";
+    /*public static final String KEY_NOME = "KEY_NOME";
     public static final String KEY_ANO = "KEY_ANO";
     public static final String KEY_CONSOLES = "KEY_CONSOLES";
     public static final String KEY_GENERO = "KEY_GENERO";
-    public static final String KEY_TIPO_MIDIA = "KEY_TIPO_MIDIA";
+    public static final String KEY_TIPO_MIDIA = "KEY_TIPO_MIDIA";*/
+
     public static final String KEY_MODO = "MODO";
+    public static final String KEY_ID = "ID";
 
     public static final String KEY_SUGERIR_GENERO = "SUGERIR_GENERO";
     public static final String KEY_ULTIMO_GENERO = "ULTIMO_GENERO";
@@ -94,7 +97,13 @@ public class JogoActivity extends AppCompatActivity {
             } else {
                 setTitle(getString(R.string.editar_jogo));
 
-                String nome = bundle.getString(JogoActivity.KEY_NOME);
+                long id = bundle.getLong(KEY_ID);
+
+                JogosDatabase database = JogosDatabase.getInstance(this);
+
+                jogoOriginal = database.getJogoDao().queryForId(id);
+
+                /*String nome = bundle.getString(JogoActivity.KEY_NOME);
                 int ano = bundle.getInt(JogoActivity.KEY_ANO);
                 ArrayList<String> consoles = bundle.getStringArrayList(JogoActivity.KEY_CONSOLES);
                 int genero = bundle.getInt(JogoActivity.KEY_GENERO);
@@ -104,16 +113,16 @@ public class JogoActivity extends AppCompatActivity {
                 boolean xBox = consoles != null && consoles.contains(getString(R.string.xbox));
                 boolean nintendoSwitch = consoles != null && consoles.contains(getString(R.string.nintendo_switch));
 
-                TipoMidia tipoMidia = TipoMidia.valueOf(tipoMidiaTexto);
+                jogoOriginal = new Jogo(nome, ano, playstation, xBox, nintendoSwitch, genero, tipoMidia); */
 
-                jogoOriginal = new Jogo(nome, ano, playstation, xBox, nintendoSwitch, genero, tipoMidia);
+                editTextNome.setText(jogoOriginal.getNome());
+                editTextAno.setText(String.valueOf(jogoOriginal.getAno()));
+                checkBoxPlay.setChecked(jogoOriginal.isPlaystation());
+                checkBoxXBox.setChecked(jogoOriginal.isXbox());
+                checkBoxSwitch.setChecked(jogoOriginal.isNintendoSwitch());
+                spinnerGenero.setSelection(jogoOriginal.getGenero());
 
-                editTextNome.setText(nome);
-                editTextAno.setText(String.valueOf(ano));
-                checkBoxPlay.setChecked(playstation);
-                checkBoxXBox.setChecked(xBox);
-                checkBoxSwitch.setChecked(nintendoSwitch);
-                spinnerGenero.setSelection(genero);
+                TipoMidia tipoMidia = jogoOriginal.getTipoMidia();
 
                 if (tipoMidia == TipoMidia.Fisica) {
                     radioButtonFisica.setChecked(true);
@@ -124,6 +133,8 @@ public class JogoActivity extends AppCompatActivity {
                     }
                 }
 
+                editTextNome.requestFocus();
+                editTextNome.setSelection(editTextNome.getText().length());
             }
         }
     }
@@ -302,29 +313,45 @@ public class JogoActivity extends AppCompatActivity {
             return;
         }
 
-        if (modo == MODO_EDITAR &&
-                nome.equalsIgnoreCase(jogoOriginal.getNome()) &&
-                ano == jogoOriginal.getAno() &&
-                playstationConsole == jogoOriginal.isPlaystation() &&
-                xBoxConsole == jogoOriginal.isXbox() &&
-                switchConsole == jogoOriginal.isNintendoSwitch() &&
-                genero == jogoOriginal.getGenero() &&
-                tipoMidia == jogoOriginal.getTipoMidia()) {
+        Jogo jogo = new Jogo(nome, ano, playstationConsole, xBoxConsole, switchConsole, genero, tipoMidia);
+
+        if (jogo.equals(jogoOriginal)) {
 
             setResult(JogoActivity.RESULT_CANCELED);
             finish();
             return;
         }
 
-        salvarUltimoTipo(genero);
-
         Intent intentResposta = new Intent();
 
-        intentResposta.putExtra(KEY_NOME, nome);
-        intentResposta.putExtra(KEY_ANO, ano);
-        intentResposta.putExtra(KEY_CONSOLES, new ArrayList<>(consoles));
-        intentResposta.putExtra(KEY_GENERO, genero);
-        intentResposta.putExtra(KEY_TIPO_MIDIA, tipoMidia.toString());
+        JogosDatabase database = JogosDatabase.getInstance(this);
+
+        if (modo == MODO_NOVO) {
+            long novoId = database.getJogoDao().insert(jogo);
+
+            if (novoId <= 0) {
+                UtilsAlert.mostrarAviso(this, R.string.erro_ao_tentar_inserir);
+                return;
+            }
+
+            jogo.setId(novoId);
+
+        } else {
+
+            jogo.setId(jogoOriginal.getId());
+
+            int quantidadeAlterada = database.getJogoDao().update(jogo);
+
+            if (quantidadeAlterada != 1) {
+                UtilsAlert.mostrarAviso(this, R.string.erro_ao_tentar_alterar);
+                return;
+            }
+
+        }
+
+        salvarUltimoTipo(genero);
+
+        intentResposta.putExtra(KEY_ID, jogo.getId());
 
         setResult(JogoActivity.RESULT_OK, intentResposta);
 

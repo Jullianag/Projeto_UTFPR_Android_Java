@@ -68,4 +68,6 @@
     <string name="desfazer">Undo</string>
     <string name="alteracao_realizada">Data update done</string>
     <string name="erro_de_conversao_de_tipo">Type convertion error!</string>
+    <string name="erro_ao_tentar_inserir">Error trying to insert!</string>
+    <string name="erro_ao_tentar_alterar">Error trying to update!</string>
 </resources>
