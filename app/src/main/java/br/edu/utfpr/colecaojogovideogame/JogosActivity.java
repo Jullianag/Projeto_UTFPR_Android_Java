@@ -334,42 +334,6 @@ public class JogosActivity extends AppCompatActivity {
 
                             listaJogos.set(posicaoSelecionada, jogoEditado);
 
-
-                            /*String nome = bundle.getString(JogoActivity.KEY_NOME);
-                            int ano = bundle.getInt(JogoActivity.KEY_ANO);
-                            ArrayList<String> consoles = bundle.getStringArrayList(JogoActivity.KEY_CONSOLES);
-                            int genero = bundle.getInt(JogoActivity.KEY_GENERO);
-                            String tipoMidiaTexto = bundle.getString(JogoActivity.KEY_TIPO_MIDIA);
-
-                            boolean playstation = consoles != null && consoles.contains(getString(R.string.playstation));
-                            boolean xBox = consoles != null && consoles.contains(getString(R.string.xbox));
-                            boolean nintendoSwitch = consoles != null && consoles.contains(getString(R.string.nintendo_switch));*/
-
-
-
-                            /*final Jogo cloneJogoOriginal;
-
-                            try {
-                                cloneJogoOriginal = (Jogo) jogo.clone();
-
-                            } catch (CloneNotSupportedException e) {
-                                e.printStackTrace();
-                                UtilsAlert.mostrarAviso(JogosActivity.this,
-                                        R.string.erro_de_conversao_de_tipo);
-
-                                return;
-                            }*/
-
-                            /*jogo.setNome(nome);
-                            jogo.setAno(ano);
-                            jogo.setGenero(genero);
-                            jogo.setPlaystation(playstation);
-                            jogo.setXbox(xBox);
-                            jogo.setNintendoSwitch(nintendoSwitch);
-
-                            TipoMidia tipoMidia = TipoMidia.valueOf(tipoMidiaTexto);
-                            jogo.setTipoMidia(tipoMidia);*/
-
                             ordenarLista();
 
                             final ConstraintLayout constraintLayout = findViewById(R.id.main);

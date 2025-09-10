@@ -64,5 +64,7 @@
     <string name="deseja_voltar_padroes">Deseja restaurar padrões?</string>
     <string name="desfazer">Desfazer</string>
     <string name="alteracao_realizada">Atualização de dados feita</string>
-    <string name="erro_de_conversao_de_tipo">Erro de conversão de tipo!</string>
+    <string name="erro_ao_tentar_inserir">Erro ao tentar inserir!</string>
+    <string name="erro_ao_tentar_alterar">Erro ao tentar alterar!</string>
+    <string name="erro_ao_tentar_excluir">Erro ao tentar excluir!</string>
 </resources>

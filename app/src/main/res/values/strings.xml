@@ -67,7 +67,6 @@
     <string name="deseja_voltar_padroes">Do you want to restore defaults?</string>
     <string name="desfazer">Undo</string>
     <string name="alteracao_realizada">Data update done</string>
-    <string name="erro_de_conversao_de_tipo">Type convertion error!</string>
     <string name="erro_ao_tentar_inserir">Error trying to insert!</string>
     <string name="erro_ao_tentar_alterar">Error trying to update!</string>
     <string name="erro_ao_tentar_excluir">Error trying to delete!</string>
