@@ -27,12 +27,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import br.edu.utfpr.colecaojogovideogame.modelo.Jogo;
-import br.edu.utfpr.colecaojogovideogame.modelo.TipoMidia;
+import br.edu.utfpr.colecaojogovideogame.persistencia.JogosDatabase;
 import br.edu.utfpr.colecaojogovideogame.utils.UtilsAlert;
 
 public class JogosActivity extends AppCompatActivity {
@@ -130,7 +129,15 @@ public class JogosActivity extends AppCompatActivity {
 
     private void popularListaJogos() {
 
-        listaJogos = new ArrayList<>();
+        JogosDatabase database = JogosDatabase.getInstance(this);
+
+        if (ordenacaoAscendente) {
+            listaJogos = database.getJogoDao().queryAllAscending();
+
+        } else {
+            listaJogos = database.getJogoDao().queryAllDownward();
+        }
+
 
         jogoRecyclerViewAdapter = new JogoRecyclerViewAdapter(this, listaJogos);
 
@@ -193,18 +200,11 @@ public class JogosActivity extends AppCompatActivity {
 
                         if (bundle != null) {
 
-                            String nome = bundle.getString(JogoActivity.KEY_NOME);
-                            int ano = bundle.getInt(JogoActivity.KEY_ANO);
-                            ArrayList<String> consoles = bundle.getStringArrayList(JogoActivity.KEY_CONSOLES);
-                            int genero = bundle.getInt(JogoActivity.KEY_GENERO);
-                            String tipoMidiaTexto = bundle.getString(JogoActivity.KEY_TIPO_MIDIA);
+                            long id = bundle.getLong(JogoActivity.KEY_ID);
 
-                            boolean playstation = consoles != null && consoles.contains(getString(R.string.playstation));
-                            boolean xBox = consoles != null && consoles.contains(getString(R.string.xbox));
-                            boolean nintendoSwitch = consoles != null && consoles.contains(getString(R.string.nintendo_switch));
+                            JogosDatabase database = JogosDatabase.getInstance(JogosActivity.this);
 
-                            Jogo jogo = new Jogo(nome, ano, playstation, xBox, nintendoSwitch,
-                                    genero, TipoMidia.valueOf(tipoMidiaTexto));
+                            Jogo jogo = database.getJogoDao().queryForId(id);
 
                             listaJogos.add(jogo);
 
@@ -280,7 +280,7 @@ public class JogosActivity extends AppCompatActivity {
 
     private void excluirJogo() {
 
-        Jogo jogo = listaJogos.get(posicaoSelecionada);
+        final Jogo jogo = listaJogos.get(posicaoSelecionada);
 
         // String mensagem = getString(R.string.deseja_apagar) + jogo.getNome() + "\"";
 
@@ -290,8 +290,17 @@ public class JogosActivity extends AppCompatActivity {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                JogosDatabase database = JogosDatabase.getInstance(JogosActivity.this);
+
+                int quantidadeAlterada = database.getJogoDao().delete(jogo);
+
+                if (quantidadeAlterada != 1) {
+                    UtilsAlert.mostrarAviso(JogosActivity.this, R.string.erro_ao_tentar_excluir);
+                    return;
+                }
+
                 listaJogos.remove(posicaoSelecionada);
-                // jogoRecyclerViewAdapter.notifyDataSetChanged();
                 jogoRecyclerViewAdapter.notifyItemRemoved(posicaoSelecionada);
                 actionMode.finish();
             }
@@ -315,7 +324,18 @@ public class JogosActivity extends AppCompatActivity {
 
                         if (bundle != null) {
 
-                            String nome = bundle.getString(JogoActivity.KEY_NOME);
+                            final Jogo jogoOriginal = listaJogos.get(posicaoSelecionada);
+
+                            long id = bundle.getLong(JogoActivity.KEY_ID);
+
+                            final JogosDatabase database = JogosDatabase.getInstance(JogosActivity.this);
+
+                            final Jogo jogoEditado = database.getJogoDao().queryForId(id);
+
+                            listaJogos.set(posicaoSelecionada, jogoEditado);
+
+
+                            /*String nome = bundle.getString(JogoActivity.KEY_NOME);
                             int ano = bundle.getInt(JogoActivity.KEY_ANO);
                             ArrayList<String> consoles = bundle.getStringArrayList(JogoActivity.KEY_CONSOLES);
                             int genero = bundle.getInt(JogoActivity.KEY_GENERO);
@@ -323,11 +343,11 @@ public class JogosActivity extends AppCompatActivity {
 
                             boolean playstation = consoles != null && consoles.contains(getString(R.string.playstation));
                             boolean xBox = consoles != null && consoles.contains(getString(R.string.xbox));
-                            boolean nintendoSwitch = consoles != null && consoles.contains(getString(R.string.nintendo_switch));
+                            boolean nintendoSwitch = consoles != null && consoles.contains(getString(R.string.nintendo_switch));*/
 
-                            final Jogo jogo = listaJogos.get(posicaoSelecionada);
 
-                            final Jogo cloneJogoOriginal;
+
+                            /*final Jogo cloneJogoOriginal;
 
                             try {
                                 cloneJogoOriginal = (Jogo) jogo.clone();
@@ -338,9 +358,9 @@ public class JogosActivity extends AppCompatActivity {
                                         R.string.erro_de_conversao_de_tipo);
 
                                 return;
-                            }
+                            }*/
 
-                            jogo.setNome(nome);
+                            /*jogo.setNome(nome);
                             jogo.setAno(ano);
                             jogo.setGenero(genero);
                             jogo.setPlaystation(playstation);
@@ -348,7 +368,7 @@ public class JogosActivity extends AppCompatActivity {
                             jogo.setNintendoSwitch(nintendoSwitch);
 
                             TipoMidia tipoMidia = TipoMidia.valueOf(tipoMidiaTexto);
-                            jogo.setTipoMidia(tipoMidia);
+                            jogo.setTipoMidia(tipoMidia);*/
 
                             ordenarLista();
 
@@ -363,8 +383,15 @@ public class JogosActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
 
-                                    listaJogos.remove(jogo);
-                                    listaJogos.add(cloneJogoOriginal);
+                                    int quantidadeAlterada = database.getJogoDao().update(jogoOriginal);
+
+                                    if (quantidadeAlterada != 1) {
+                                        UtilsAlert.mostrarAviso(JogosActivity.this, R.string.erro_ao_tentar_alterar);
+                                        return;
+                                    }
+
+                                    listaJogos.remove(jogoEditado);
+                                    listaJogos.add(jogoOriginal);
 
                                     ordenarLista();
                                 }
@@ -390,7 +417,9 @@ public class JogosActivity extends AppCompatActivity {
 
         intentAbertura.putExtra(JogoActivity.KEY_MODO, JogoActivity.MODO_EDITAR);
 
-        intentAbertura.putExtra(JogoActivity.KEY_NOME, jogo.getNome());
+        intentAbertura.putExtra(JogoActivity.KEY_ID, jogo.getId());
+
+        /*intentAbertura.putExtra(JogoActivity.KEY_NOME, jogo.getNome());
         intentAbertura.putExtra(JogoActivity.KEY_ANO, jogo.getAno());
 
         ArrayList<String> consoles = new ArrayList<>();
@@ -407,7 +436,7 @@ public class JogosActivity extends AppCompatActivity {
 
         intentAbertura.putExtra(JogoActivity.KEY_CONSOLES, consoles);
         intentAbertura.putExtra(JogoActivity.KEY_GENERO, jogo.getGenero());
-        intentAbertura.putExtra(JogoActivity.KEY_TIPO_MIDIA, jogo.getTipoMidia().toString());
+        intentAbertura.putExtra(JogoActivity.KEY_TIPO_MIDIA, jogo.getTipoMidia().toString());*/
 
         launcherEditarJogo.launch(intentAbertura);
     }

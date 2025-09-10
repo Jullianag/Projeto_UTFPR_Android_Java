@@ -70,4 +70,5 @@
     <string name="erro_de_conversao_de_tipo">Type convertion error!</string>
     <string name="erro_ao_tentar_inserir">Error trying to insert!</string>
     <string name="erro_ao_tentar_alterar">Error trying to update!</string>
+    <string name="erro_ao_tentar_excluir">Error trying to delete!</string>
 </resources>
