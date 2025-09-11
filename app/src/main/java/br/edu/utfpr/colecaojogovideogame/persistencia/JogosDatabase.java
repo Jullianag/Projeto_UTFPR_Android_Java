@@ -9,7 +9,7 @@ import androidx.room.TypeConverters;
 
 import br.edu.utfpr.colecaojogovideogame.modelo.Jogo;
 
-@Database(entities = {Jogo.class}, version = 1)
+@Database(entities = {Jogo.class}, version = 2)
 @TypeConverters({ConverterTipoMidia.class})
 public abstract class JogosDatabase extends RoomDatabase {
 
@@ -25,10 +25,15 @@ public abstract class JogosDatabase extends RoomDatabase {
 
                 if (INSTANCE == null) {
 
-                    INSTANCE = Room.databaseBuilder(
-                            context,
-                            JogosDatabase.class,
-                            "jogos.db").allowMainThreadQueries().build();
+                    Builder builder = Room.databaseBuilder(context, JogosDatabase.class, "jogos.db");
+
+                    builder.allowMainThreadQueries();
+
+                    builder.addMigrations(new Migrar_1_2());
+
+                    // builder.fallbackToDestructiveMigration();
+
+                    INSTANCE = (JogosDatabase) builder.build();
                 }
             }
         }
