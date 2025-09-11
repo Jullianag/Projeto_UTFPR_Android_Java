@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'br.edu.utfpr.colecaojogovideogame'
-    compileSdk 36
+    namespace = 'br.edu.utfpr.colecaojogovideogame'
+    compileSdk = 36
 
     defaultConfig {
-        applicationId "br.edu.utfpr.colecaojogovideogame"
+        applicationId = "br.edu.utfpr.colecaojogovideogame"
         minSdk 24
         targetSdk 36
         versionCode 1
@@ -29,9 +29,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
+
 }
 
 dependencies {
@@ -40,6 +42,10 @@ dependencies {
 
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"*/
+
+    coreLibraryDesugaring libs.desugar.jdk.libs
+
+    implementation libs.androidx.core
 
     implementation libs.androidx.room.runtime
     annotationProcessor libs.androidx.room.compiler

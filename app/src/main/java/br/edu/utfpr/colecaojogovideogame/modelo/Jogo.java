@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -47,6 +48,8 @@ public class Jogo implements Cloneable {
     private int genero;
 
     private TipoMidia tipoMidia;
+
+    private LocalDate dataLancamento;
 
     public Jogo(String nome, int ano, boolean playstation, boolean xbox, boolean nintendoSwitch, int genero, TipoMidia tipoMidia) {
         this.nome = nome;
@@ -122,6 +125,14 @@ public class Jogo implements Cloneable {
         this.tipoMidia = tipoMidia;
     }
 
+    public LocalDate getDataLancamento() {
+        return dataLancamento;
+    }
+
+    public void setDataLancamento(LocalDate dataLancamento) {
+        this.dataLancamento = dataLancamento;
+    }
+
     @NonNull
     @Override
     public Object clone() throws CloneNotSupportedException {
@@ -137,6 +148,15 @@ public class Jogo implements Cloneable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Jogo jogo = (Jogo) o;
+
+        if (dataLancamento == null && jogo.dataLancamento !=null) {
+            return false;
+        }
+
+        if (dataLancamento != null && dataLancamento.equals(jogo.dataLancamento) == false) {
+            return false;
+        }
+
         return ano == jogo.ano &&
                 playstation == jogo.playstation &&
                 xbox == jogo.xbox &&
@@ -148,7 +168,7 @@ public class Jogo implements Cloneable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(nome, ano, playstation, xbox, nintendoSwitch, genero, tipoMidia);
+        return Objects.hash(nome, ano, playstation, xbox, nintendoSwitch, genero, tipoMidia, dataLancamento);
     }
 
     @Override
@@ -159,6 +179,7 @@ public class Jogo implements Cloneable {
                 xbox + "\n" +
                 nintendoSwitch + "\n" +
                 genero + "\n" +
-                tipoMidia;
+                tipoMidia + "\n" +
+                dataLancamento;
     }
 }

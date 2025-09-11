@@ -9,8 +9,8 @@ import androidx.room.TypeConverters;
 
 import br.edu.utfpr.colecaojogovideogame.modelo.Jogo;
 
-@Database(entities = {Jogo.class}, version = 2)
-@TypeConverters({ConverterTipoMidia.class})
+@Database(entities = {Jogo.class}, version = 3)
+@TypeConverters({ConverterTipoMidia.class, ConverterLocalDate.class})
 public abstract class JogosDatabase extends RoomDatabase {
 
     public abstract JogoDao getJogoDao();
@@ -30,6 +30,7 @@ public abstract class JogosDatabase extends RoomDatabase {
                     builder.allowMainThreadQueries();
 
                     builder.addMigrations(new Migrar_1_2());
+                    builder.addMigrations(new Migrar_2_3());
 
                     // builder.fallbackToDestructiveMigration();
 
