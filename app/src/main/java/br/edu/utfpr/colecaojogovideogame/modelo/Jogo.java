@@ -51,7 +51,7 @@ public class Jogo implements Cloneable {
 
     private LocalDate dataLancamento;
 
-    public Jogo(String nome, int ano, boolean playstation, boolean xbox, boolean nintendoSwitch, int genero, TipoMidia tipoMidia) {
+    public Jogo(String nome, int ano, boolean playstation, boolean xbox, boolean nintendoSwitch, int genero, TipoMidia tipoMidia, LocalDate dataLancamento) {
         this.nome = nome;
         this.ano = ano;
         this.playstation = playstation;
@@ -59,6 +59,7 @@ public class Jogo implements Cloneable {
         this.nintendoSwitch = nintendoSwitch;
         this.genero = genero;
         this.tipoMidia = tipoMidia;
+        this.dataLancamento = dataLancamento;
     }
 
     public long getId() {

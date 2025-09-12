@@ -67,4 +67,8 @@
     <string name="erro_ao_tentar_inserir">Erro ao tentar inserir!</string>
     <string name="erro_ao_tentar_alterar">Erro ao tentar alterar!</string>
     <string name="erro_ao_tentar_excluir">Erro ao tentar excluir!</string>
+    <string name="data_lancamento">Data de Lançamento:</string>
+    <string name="faltou_entrar_com_data_lancamento">Data de lançamento não pode ser vazia!</string>
+    <string name="idade_invalida">Idade inválida para o jogo!</string>
+    <string name="data_lancamento_valor">Data de Lançamento:</string>
 </resources>

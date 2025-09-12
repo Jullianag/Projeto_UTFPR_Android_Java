@@ -70,4 +70,8 @@
     <string name="erro_ao_tentar_inserir">Error trying to insert!</string>
     <string name="erro_ao_tentar_alterar">Error trying to update!</string>
     <string name="erro_ao_tentar_excluir">Error trying to delete!</string>
+    <string name="data_lancamento">Release Date:</string>
+    <string name="faltou_entrar_com_data_lancamento">The release date cannot be empty!</string>
+    <string name="idade_invalida">Age needs to be 1 to 67 years!</string>
+    <string name="data_lancamento_valor">Release Date</string>
 </resources>

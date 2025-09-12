@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.utfpr.colecaojogovideogame.modelo.Jogo;
+import br.edu.utfpr.colecaojogovideogame.utils.UtilsLocalDate;
 
 public class JogoRecyclerViewAdapter extends RecyclerView.Adapter<JogoRecyclerViewAdapter.JogoHolder> {
 
@@ -66,6 +67,7 @@ public class JogoRecyclerViewAdapter extends RecyclerView.Adapter<JogoRecyclerVi
 
         public TextView textViewValorNome;
         public TextView textViewValorAno;
+        public TextView textViewValorDataLancamento;
         public TextView textViewValorValorConsole;
         public TextView textViewValorGenero;
         public TextView textViewValorTipoMidia;
@@ -75,6 +77,7 @@ public class JogoRecyclerViewAdapter extends RecyclerView.Adapter<JogoRecyclerVi
 
             textViewValorNome = itemView.findViewById(R.id.textViewValorNome);
             textViewValorAno = itemView.findViewById(R.id.textViewValorAno);
+            textViewValorDataLancamento = itemView.findViewById(R.id.textViewValorDataLancamento);
             textViewValorValorConsole = itemView.findViewById(R.id.textViewValorConsole);
             textViewValorGenero = itemView.findViewById(R.id.textViewValorGenero);
             textViewValorTipoMidia = itemView.findViewById(R.id.textViewValorTipoMidia);
@@ -146,6 +149,8 @@ public class JogoRecyclerViewAdapter extends RecyclerView.Adapter<JogoRecyclerVi
 
         holder.textViewValorNome.setText(jogo.getNome());
         holder.textViewValorAno.setText(String.valueOf(jogo.getAno()));
+
+        holder.textViewValorDataLancamento.setText(UtilsLocalDate.formatLocalDate(jogo.getDataLancamento()));
 
         List<String> valorConsoles = new ArrayList<>();
 

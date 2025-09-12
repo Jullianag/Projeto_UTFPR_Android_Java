@@ -1,5 +1,6 @@
 package br.edu.utfpr.colecaojogovideogame;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -30,6 +32,7 @@ import br.edu.utfpr.colecaojogovideogame.modelo.Jogo;
 import br.edu.utfpr.colecaojogovideogame.modelo.TipoMidia;
 import br.edu.utfpr.colecaojogovideogame.persistencia.JogosDatabase;
 import br.edu.utfpr.colecaojogovideogame.utils.UtilsAlert;
+import br.edu.utfpr.colecaojogovideogame.utils.UtilsLocalDate;
 
 public class JogoActivity extends AppCompatActivity {
 
@@ -48,7 +51,7 @@ public class JogoActivity extends AppCompatActivity {
     public static final int MODO_NOVO = 0;
     public static final int MODO_EDITAR = 1;
 
-    private EditText editTextNome, editTextAno;
+    private EditText editTextNome, editTextAno, editTextDataLancamento;
     private CheckBox checkBoxPlay, checkBoxXBox, checkBoxSwitch;
     private Spinner spinnerGenero;
     private RadioGroup radioGroupTipoMidia;
@@ -60,6 +63,9 @@ public class JogoActivity extends AppCompatActivity {
     private boolean sugerirGenero = false;
     private int ultimoGenero = 0;
 
+    private LocalDate dataLancamento;
+    private int anosParaTras;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +73,7 @@ public class JogoActivity extends AppCompatActivity {
 
         editTextNome = findViewById(R.id.editTextNome);
         editTextAno = findViewById(R.id.editTextAno);
+        editTextDataLancamento = findViewById(R.id.editTextDataLancamento);
         checkBoxPlay = findViewById(R.id.checkBoxPlay);
         checkBoxXBox = findViewById(R.id.checkBoxXBox);
         checkBoxSwitch = findViewById(R.id.checkBoxSwitch);
@@ -75,7 +82,20 @@ public class JogoActivity extends AppCompatActivity {
         radioButtonFisica = findViewById(R.id.radioButtonFisica);
         radioButtonDigital = findViewById(R.id.radioButtonDigital);
 
+        editTextDataLancamento.setFocusable(false);
+
+        editTextDataLancamento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mostrarDatePickerDialog();
+            }
+        });
+
         lerPreferencias();
+        anosParaTras = getResources().getInteger(R.integer.anos_para_tras);
+
+        dataLancamento = LocalDate.now().minusYears(anosParaTras);
 
         Intent intentAbertuta = getIntent();
 
@@ -117,6 +137,13 @@ public class JogoActivity extends AppCompatActivity {
 
                 editTextNome.setText(jogoOriginal.getNome());
                 editTextAno.setText(String.valueOf(jogoOriginal.getAno()));
+
+                if (jogoOriginal.getDataLancamento() != null) {
+                    dataLancamento = jogoOriginal.getDataLancamento();
+                }
+
+                editTextDataLancamento.setText(UtilsLocalDate.formatLocalDate(dataLancamento));
+
                 checkBoxPlay.setChecked(jogoOriginal.isPlaystation());
                 checkBoxXBox.setChecked(jogoOriginal.isXbox());
                 checkBoxSwitch.setChecked(jogoOriginal.isNintendoSwitch());
@@ -139,10 +166,34 @@ public class JogoActivity extends AppCompatActivity {
         }
     }
 
+    private void mostrarDatePickerDialog() {
+
+        DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                dataLancamento = LocalDate.of(year, month + 1, dayOfMonth);
+
+                editTextDataLancamento.setText(UtilsLocalDate.formatLocalDate(dataLancamento));
+            }
+        };
+
+        DatePickerDialog picker = new DatePickerDialog(this,
+                listener,
+                dataLancamento.getYear(),
+                dataLancamento.getMonthValue() - 1,
+                dataLancamento.getDayOfMonth());
+
+        long dataMaximaMillis = UtilsLocalDate.toMillissegundos(LocalDate.now());
+        picker.getDatePicker().setMaxDate(dataMaximaMillis);
+        picker.show();
+    }
+
     public void limparCampos() {
 
         final String nome = editTextNome.getText().toString();
         final String ano = editTextAno.getText().toString();
+        final LocalDate dataLancamentoAnterior = dataLancamento;
         final boolean playstation = checkBoxPlay.isChecked();
         final boolean xBox = checkBoxXBox.isChecked();
         final boolean nintendoSwitch = checkBoxSwitch.isChecked();
@@ -154,6 +205,10 @@ public class JogoActivity extends AppCompatActivity {
 
         editTextNome.setText(null);
         editTextAno.setText(null);
+
+        editTextDataLancamento.setText(null);
+        dataLancamento = LocalDate.now().minusYears(anosParaTras);
+
         checkBoxPlay.setChecked(false);
         checkBoxXBox.setChecked(false);
         checkBoxSwitch.setChecked(false);
@@ -173,6 +228,10 @@ public class JogoActivity extends AppCompatActivity {
 
                 editTextNome.setText(nome);
                 editTextAno.setText(ano);
+
+                dataLancamento = dataLancamentoAnterior;
+                editTextDataLancamento.setText(UtilsLocalDate.formatLocalDate(dataLancamento));
+
                 checkBoxPlay.setChecked(playstation);
                 checkBoxXBox.setChecked(xBox);
                 checkBoxSwitch.setChecked(nintendoSwitch);
@@ -260,6 +319,20 @@ public class JogoActivity extends AppCompatActivity {
             return;
         }
 
+        String dataLancamentoString = editTextDataLancamento.getText().toString();
+
+        if (dataLancamentoString == null || dataLancamentoString.trim().isEmpty()) {
+            UtilsAlert.mostrarAviso(this, R.string.faltou_entrar_com_data_lancamento);
+            return;
+        }
+
+        int idade = UtilsLocalDate.diferencaEmAnosParaHoje(dataLancamento);
+
+        if (idade < 0 || idade > 67) {
+            UtilsAlert.mostrarAviso(this, R.string.idade_invalida);
+            return;
+        }
+
         boolean playstationConsole = checkBoxPlay.isChecked();
         boolean xBoxConsole = checkBoxXBox.isChecked();
         boolean switchConsole = checkBoxSwitch.isChecked();
@@ -313,7 +386,7 @@ public class JogoActivity extends AppCompatActivity {
             return;
         }
 
-        Jogo jogo = new Jogo(nome, ano, playstationConsole, xBoxConsole, switchConsole, genero, tipoMidia);
+        Jogo jogo = new Jogo(nome, ano, playstationConsole, xBoxConsole, switchConsole, genero, tipoMidia, dataLancamento);
 
         if (jogo.equals(jogoOriginal)) {
 

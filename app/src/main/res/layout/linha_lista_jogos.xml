@@ -48,6 +48,27 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewValorNome" />
 
     <TextView
+        android:id="@+id/textViewRotuloDataLancamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/data_lancamento_valor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRotuloAno" />
+
+    <TextView
+        android:id="@+id/textViewValorDataLancamento"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewRotuloDataLancamento"
+        app:layout_constraintTop_toBottomOf="@+id/textViewValorAno" />
+
+    <TextView
         android:id="@+id/textViewValorConsole"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,7 +76,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/playstation"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRotuloAno" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRotuloDataLancamento" />
 
     <TextView
         android:id="@+id/textViewRotuloGenero"
