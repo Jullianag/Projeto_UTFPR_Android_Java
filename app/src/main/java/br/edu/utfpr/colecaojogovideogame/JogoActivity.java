@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +24,6 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import br.edu.utfpr.colecaojogovideogame.modelo.Jogo;
@@ -51,7 +49,7 @@ public class JogoActivity extends AppCompatActivity {
     public static final int MODO_NOVO = 0;
     public static final int MODO_EDITAR = 1;
 
-    private EditText editTextNome, editTextAno, editTextDataLancamento;
+    private EditText editTextNome, editTextNota, editTextDataLancamento;
     private CheckBox checkBoxPlay, checkBoxXBox, checkBoxSwitch;
     private Spinner spinnerGenero;
     private RadioGroup radioGroupTipoMidia;
@@ -72,7 +70,7 @@ public class JogoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_jogo);
 
         editTextNome = findViewById(R.id.editTextNome);
-        editTextAno = findViewById(R.id.editTextAno);
+        editTextNota = findViewById(R.id.editTextNota);
         editTextDataLancamento = findViewById(R.id.editTextDataLancamento);
         checkBoxPlay = findViewById(R.id.checkBoxPlay);
         checkBoxXBox = findViewById(R.id.checkBoxXBox);
@@ -136,7 +134,7 @@ public class JogoActivity extends AppCompatActivity {
                 jogoOriginal = new Jogo(nome, ano, playstation, xBox, nintendoSwitch, genero, tipoMidia); */
 
                 editTextNome.setText(jogoOriginal.getNome());
-                editTextAno.setText(String.valueOf(jogoOriginal.getAno()));
+                editTextNota.setText(String.valueOf(jogoOriginal.getNota()));
 
                 if (jogoOriginal.getDataLancamento() != null) {
                     dataLancamento = jogoOriginal.getDataLancamento();
@@ -192,7 +190,7 @@ public class JogoActivity extends AppCompatActivity {
     public void limparCampos() {
 
         final String nome = editTextNome.getText().toString();
-        final String ano = editTextAno.getText().toString();
+        final String nota = editTextNota.getText().toString();
         final LocalDate dataLancamentoAnterior = dataLancamento;
         final boolean playstation = checkBoxPlay.isChecked();
         final boolean xBox = checkBoxXBox.isChecked();
@@ -204,7 +202,7 @@ public class JogoActivity extends AppCompatActivity {
         final View viewComFoco = scrollView.findFocus();
 
         editTextNome.setText(null);
-        editTextAno.setText(null);
+        editTextNota.setText(null);
 
         editTextDataLancamento.setText(null);
         dataLancamento = LocalDate.now().minusYears(anosParaTras);
@@ -227,7 +225,7 @@ public class JogoActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 editTextNome.setText(nome);
-                editTextAno.setText(ano);
+                editTextNota.setText(nota);
 
                 dataLancamento = dataLancamentoAnterior;
                 editTextDataLancamento.setText(UtilsLocalDate.formatLocalDate(dataLancamento));
@@ -272,35 +270,39 @@ public class JogoActivity extends AppCompatActivity {
 
         nome = nome.trim();
 
-        String anoString = editTextAno.getText().toString();
+        String anoString = editTextNota.getText().toString();
 
         if (anoString == null || anoString.trim().isEmpty()) {
 
             UtilsAlert.mostrarAviso(this,
                     R.string.o_ano_nao_pode_ser_vazio);
 
-            editTextAno.requestFocus();
+            editTextNota.requestFocus();
             return;
         }
 
-        int ano = 0;
+        int nota = 0;
 
         try {
-            ano = Integer.parseInt(anoString);
+            nota = Integer.parseInt(anoString);
 
         } catch (NumberFormatException e) {
 
             UtilsAlert.mostrarAviso(this,
                     R.string.o_ano_deve_ser_um_numero_inteiro);
 
-            editTextAno.requestFocus();
-            editTextAno.setSelection(0, editTextAno.getText().toString().length());
+            editTextNota.requestFocus();
+            editTextNota.setSelection(0, editTextNota.getText().toString().length());
             return;
         }
 
-        int anoAtual;
+        if (nota < 0 || nota > 10) {
+            UtilsAlert.mostrarAviso(this, R.string.a_nota_deve_estar_entre_0_e_10);
+            editTextNota.requestFocus();
+            return;
+        }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
             anoAtual = LocalDate.now().getYear();
         }
@@ -314,10 +316,10 @@ public class JogoActivity extends AppCompatActivity {
             UtilsAlert.mostrarAviso(this,
                     R.string.o_ano_deve_estar_entre_1972_e_o_ano_atual);
 
-            editTextAno.requestFocus();
-            editTextAno.setSelection(0, editTextAno.getText().toString().length());
+            editTextNota.requestFocus();
+            editTextNota.setSelection(0, editTextNota.getText().toString().length());
             return;
-        }
+        }*/
 
         String dataLancamentoString = editTextDataLancamento.getText().toString();
 
@@ -386,7 +388,7 @@ public class JogoActivity extends AppCompatActivity {
             return;
         }
 
-        Jogo jogo = new Jogo(nome, ano, playstationConsole, xBoxConsole, switchConsole, genero, tipoMidia, dataLancamento);
+        Jogo jogo = new Jogo(nome, nota, playstationConsole, xBoxConsole, switchConsole, genero, tipoMidia, dataLancamento);
 
         if (jogo.equals(jogoOriginal)) {
 

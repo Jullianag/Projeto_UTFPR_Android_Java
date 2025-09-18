@@ -27,24 +27,24 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewRotuloAno"
+        android:id="@+id/textViewRotuloNota"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/ano_valor"
+        android:text="@string/nota_valor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewRotuloNome" />
 
     <TextView
-        android:id="@+id/textViewValorAno"
+        android:id="@+id/textViewValorNota"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewRotuloAno"
+        app:layout_constraintStart_toEndOf="@+id/textViewRotuloNota"
         app:layout_constraintTop_toBottomOf="@+id/textViewValorNome" />
 
     <TextView
@@ -55,7 +55,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/data_lancamento_valor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRotuloAno" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRotuloNota" />
 
     <TextView
         android:id="@+id/textViewValorDataLancamento"
@@ -66,7 +66,7 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewRotuloDataLancamento"
-        app:layout_constraintTop_toBottomOf="@+id/textViewValorAno" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewValorNota" />
 
     <TextView
         android:id="@+id/textViewValorConsole"

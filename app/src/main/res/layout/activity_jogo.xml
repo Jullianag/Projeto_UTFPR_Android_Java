@@ -41,31 +41,31 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewNome" />
 
         <TextView
-            android:id="@+id/textViewAno"
+            android:id="@+id/textViewNota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:labelFor="@id/editTextAno"
-            android:text="@string/ano_lancamento"
-            app:layout_constraintEnd_toStartOf="@+id/editTextAno"
+            android:labelFor="@id/editTextNota"
+            android:text="@string/nota"
+            app:layout_constraintEnd_toStartOf="@id/editTextNota"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextNome" />
 
         <EditText
-            android:id="@+id/editTextAno"
+            android:id="@+id/editTextNota"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:ems="10"
-            android:hint="@string/ano_lancamento_valor"
+            android:hint="@string/nota_valor"
             android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewAno" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewNota" />
 
         <TextView
             android:id="@+id/textViewDataLancamento"
@@ -73,18 +73,19 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
+            android:labelFor="@id/editTextDataLancamento"
             android:text="@string/data_lancamento"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextAno" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextNota" />
 
         <EditText
             android:id="@+id/editTextDataLancamento"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:ems="10"
-            android:hint="@string/data_lancamento"
+            android:hint="@string/data_lancamento_valor"
             android:inputType="date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewDataLancamento" />

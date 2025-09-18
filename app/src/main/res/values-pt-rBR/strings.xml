@@ -70,5 +70,8 @@
     <string name="data_lancamento">Data de Lançamento:</string>
     <string name="faltou_entrar_com_data_lancamento">Data de lançamento não pode ser vazia!</string>
     <string name="idade_invalida">Idade inválida para o jogo!</string>
-    <string name="data_lancamento_valor">Data de Lançamento:</string>
+    <string name="data_lancamento_valor">Data de Lançamento</string>
+    <string name="nota_valor">Nota do Usuário</string>
+    <string name="nota">Nota:</string>
+    <string name="a_nota_deve_estar_entre_0_e_10">A nota deve ser um número de 0 a 10!</string>
 </resources>

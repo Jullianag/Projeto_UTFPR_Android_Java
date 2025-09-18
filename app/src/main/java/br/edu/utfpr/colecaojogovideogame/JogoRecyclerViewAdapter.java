@@ -66,7 +66,7 @@ public class JogoRecyclerViewAdapter extends RecyclerView.Adapter<JogoRecyclerVi
                                                                        View.OnCreateContextMenuListener {
 
         public TextView textViewValorNome;
-        public TextView textViewValorAno;
+        public TextView textViewValorNota;
         public TextView textViewValorDataLancamento;
         public TextView textViewValorValorConsole;
         public TextView textViewValorGenero;
@@ -76,7 +76,7 @@ public class JogoRecyclerViewAdapter extends RecyclerView.Adapter<JogoRecyclerVi
             super(itemView);
 
             textViewValorNome = itemView.findViewById(R.id.textViewValorNome);
-            textViewValorAno = itemView.findViewById(R.id.textViewValorAno);
+            textViewValorNota = itemView.findViewById(R.id.textViewValorNota);
             textViewValorDataLancamento = itemView.findViewById(R.id.textViewValorDataLancamento);
             textViewValorValorConsole = itemView.findViewById(R.id.textViewValorConsole);
             textViewValorGenero = itemView.findViewById(R.id.textViewValorGenero);
@@ -148,7 +148,7 @@ public class JogoRecyclerViewAdapter extends RecyclerView.Adapter<JogoRecyclerVi
         Jogo jogo = listaJogos.get(position);
 
         holder.textViewValorNome.setText(jogo.getNome());
-        holder.textViewValorAno.setText(String.valueOf(jogo.getAno()));
+        holder.textViewValorNota.setText(String.valueOf(jogo.getNota()));
 
         holder.textViewValorDataLancamento.setText(UtilsLocalDate.formatLocalDate(jogo.getDataLancamento()));
 

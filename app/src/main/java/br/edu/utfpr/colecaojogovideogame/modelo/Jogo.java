@@ -37,7 +37,7 @@ public class Jogo implements Cloneable {
     @ColumnInfo(index = true)
     private String nome;
 
-    private int ano;
+    private int nota;
 
     private boolean playstation;
 
@@ -51,9 +51,9 @@ public class Jogo implements Cloneable {
 
     private LocalDate dataLancamento;
 
-    public Jogo(String nome, int ano, boolean playstation, boolean xbox, boolean nintendoSwitch, int genero, TipoMidia tipoMidia, LocalDate dataLancamento) {
+    public Jogo(String nome, int nota, boolean playstation, boolean xbox, boolean nintendoSwitch, int genero, TipoMidia tipoMidia, LocalDate dataLancamento) {
         this.nome = nome;
-        this.ano = ano;
+        this.nota = nota;
         this.playstation = playstation;
         this.xbox = xbox;
         this.nintendoSwitch = nintendoSwitch;
@@ -78,12 +78,12 @@ public class Jogo implements Cloneable {
         this.nome = nome;
     }
 
-    public int getAno() {
-        return ano;
+    public int getNota() {
+        return nota;
     }
 
-    public void setAno(int ano) {
-        this.ano = ano;
+    public void setNota(int ano) {
+        this.nota = ano;
     }
 
     public boolean isPlaystation() {
@@ -158,7 +158,7 @@ public class Jogo implements Cloneable {
             return false;
         }
 
-        return ano == jogo.ano &&
+        return nota == jogo.nota &&
                 playstation == jogo.playstation &&
                 xbox == jogo.xbox &&
                 nintendoSwitch == jogo.nintendoSwitch &&
@@ -169,13 +169,13 @@ public class Jogo implements Cloneable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(nome, ano, playstation, xbox, nintendoSwitch, genero, tipoMidia, dataLancamento);
+        return Objects.hash(nome, nota, playstation, xbox, nintendoSwitch, genero, tipoMidia, dataLancamento);
     }
 
     @Override
     public String toString() {
         return nome + "\n" +
-                ano + "\n" +
+                nota + "\n" +
                 playstation + "\n" +
                 xbox + "\n" +
                 nintendoSwitch + "\n" +
