@@ -7,13 +7,16 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import br.edu.utfpr.colecaojogovideogame.modelo.Anotacao;
 import br.edu.utfpr.colecaojogovideogame.modelo.Jogo;
 
-@Database(entities = {Jogo.class}, version = 3)
-@TypeConverters({ConverterTipoMidia.class, ConverterLocalDate.class})
+@Database(entities = {Jogo.class, Anotacao.class}, version = 4)
+@TypeConverters({ConverterTipoMidia.class, ConverterLocalDate.class, ConverterLocalDateTime.class})
 public abstract class JogosDatabase extends RoomDatabase {
 
     public abstract JogoDao getJogoDao();
+
+    public abstract AnotacaoDao getAnotacaoDao();
 
     private static JogosDatabase INSTANCE;
 
@@ -31,6 +34,7 @@ public abstract class JogosDatabase extends RoomDatabase {
 
                     builder.addMigrations(new Migrar_1_2());
                     builder.addMigrations(new Migrar_2_3());
+                    builder.addMigrations(new Migrar_3_4());
 
                     // builder.fallbackToDestructiveMigration();
 
