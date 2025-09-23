@@ -7,5 +7,29 @@
     <color name="cinza_escuro">#AAAAAA</color>
     <color name="azul_escuro">#3F51B5</color>
     <color name="cinza_transparente">#C8808080</color>
-    <color name="amarelo_transparente">#9AEBB80D</color>
+    <color name="amarelo_transparente">#9AEBBF0D</color>
+
+
+    <color name="azul_colorPrimary">#1976D2</color>
+    <color name="azul_colorPrimaryVariant">#64B5F6</color>
+    <color name="branco_colorOnPrimary">#FFFFFF</color>
+
+    <color name="cinza_colorPrimaryContainer">#BBDEFB</color>
+
+    <color name="azul_escuro_colorOnPrimaryContainer">#0D47A1</color>
+
+    <color name="android_colorBackground">#F5F5F5</color>
+    <color name="preto_colorOnBackground">#000000</color>
+
+    <color name="branco_colorSurface">#FFFFFF</color>
+    <color name="preto_colorOnSurface">#000000</color>
+
+
+    <color name="azul_colorSecondary">#42A5F5</color>
+    <color name="branco_colorOnSecondary">#FFFFFF</color>
+    <color name="azul_escuro_colorSecondaryContainer">#1565C0</color>
+    <color name="azul_claro_colorOnSecondaryContainer">#E3F2FD</color>
+
+
+
 </resources>

@@ -2,12 +2,35 @@
     <!-- Base application theme. -->
     <style name="Theme.ThemeStylesIcons" parent="Theme.Material3.Light">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/amarelo</item>
-         <item name="colorPrimaryVariant">@color/amarelo_escuro</item>
-         <item name="colorOnPrimary">@color/preto</item>
+        <!--<item name="colorPrimary">@color/amarelo</item>-->
 
-        <item name="android:textColorLink">@color/azul_escuro</item>
-    </style>
+        <!--<item name="colorPrimaryVariant">@color/amarelo_escuro</item>-->
 
-    <color name="corSelecionado">@color/amarelo_transparente</color>
+        <!-- <item name="colorOnPrimary">@color/preto</item>-->
+        <!-- <color name="corSelecionado">@color/amarelo_transparente</color> -->
+
+        <item name="colorPrimary">@color/azul_colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/azul_colorPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/branco_colorOnPrimary</item>
+
+        <item name="colorPrimaryContainer">@color/cinza_colorPrimaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/azul_escuro_colorOnPrimaryContainer</item>
+
+        <item name="android:colorBackground">@color/android_colorBackground</item>
+        <item name="colorOnBackground">@color/preto_colorOnBackground</item>
+
+        <item name="colorSurface">@color/branco_colorSurface</item>
+        <item name="colorOnSurface">@color/preto_colorOnSurface</item>
+
+        <item name="colorSecondary">@color/azul_colorSecondary</item>
+        <item name="colorOnSecondary">@color/branco_colorOnSecondary</item>
+        <item name="colorSecondaryContainer">@color/azul_escuro_colorSecondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/azul_claro_colorOnSecondaryContainer</item>
+
+       <item name="android:textColorLink">@color/azul_escuro</item>
+
+   </style>
+
+
+   <color name="corSelecionado">#9A0D8FEB</color>
 </resources>

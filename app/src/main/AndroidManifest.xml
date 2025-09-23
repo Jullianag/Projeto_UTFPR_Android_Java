@@ -32,7 +32,9 @@
         <activity
             android:name=".JogoActivity"
             android:exported="false"
-            android:parentActivityName=".JogosActivity"></activity>
+            android:parentActivityName=".JogosActivity">
+
+        </activity>
     </application>
 
 </manifest>
