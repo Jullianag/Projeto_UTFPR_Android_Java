@@ -1,11 +1,10 @@
-# Commerce JAVA 
+# Projeto Android UTFPR JAVA 
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/Jullianag/Projeto_UTFPR_Android_Java/blob/main/LICENSE) ![GitHub language count](https://img.shields.io/github/languages/count/Jullianag/Projeto_UTFPR_Android_Java)  ![GitHub repo size](https://img.shields.io/github/repo-size/Jullianag/Projeto_UTFPR_Android_Java)
 
 
 # Sobre o projeto
 
-Projeto Android desenvolvido na aula de Java para dispositivos móveis cursado pela Especialização em Java da UTFPR.  
-Site: [UTFPR](https://pos-graduacao-ead.cp.utfpr.edu.br/java/ "Site UTFPR").  
+Projeto Android desenvolvido na aula de Java para dispositivos móveis cursado pela Especialização em Java da UTFPR. Site: [UTFPR](https://pos-graduacao-ead.cp.utfpr.edu.br/java/ "Site UTFPR").  
 Este App conta com vários conceitos de programação java e android, como por exemplo: 
 
 * Menu de Ação contextual
