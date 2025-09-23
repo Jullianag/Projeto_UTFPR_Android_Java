@@ -20,16 +20,12 @@ Neste projeto o usuário registra seus jogos faoritos com os campos: nome, nota,
 Após adicionar os jogos são exibidos em uma lista onde é possível ordenar em ordem crescente ou descrescente através de um ícone. Este app também conta com as funções de editar e limpar os campos do cadastro, 
 bem como as validações de possíveis erros ao adicionar um jogo.
 
-## Algumas imagens do que seria o Layout web
+## Algumas imagens do layout
 ![Demonstração 1]()
 
 ![Demonstração 2]()
 
 ![Demonstração 3]()
-
-## Modelo conceitual
-![Modelo Conceitual]()
-
 
 # Tecnologias utilizadas
 ## Back end
