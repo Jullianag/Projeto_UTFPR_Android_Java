@@ -48,9 +48,10 @@ git clone https://github.com/Jullianag/Projeto_UTFPR_Android_Java
 
 ```
 
-## Back end
-Pré-requisitos: Java 11  
-Android: SDK 24 Mínimo
+## Pré-requisitos
+Java 11  
+Android: SDK 24 Min  
+API: 29 Min
 
 
 # Autor
