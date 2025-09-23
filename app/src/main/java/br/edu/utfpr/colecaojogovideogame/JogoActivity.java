@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -17,6 +18,10 @@ import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -64,6 +69,8 @@ public class JogoActivity extends AppCompatActivity {
     private LocalDate dataLancamento;
     private int anosParaTras;
 
+    private Button buttonAnotacoes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +86,7 @@ public class JogoActivity extends AppCompatActivity {
         spinnerGenero = findViewById(R.id.spinnerGenero);
         radioButtonFisica = findViewById(R.id.radioButtonFisica);
         radioButtonDigital = findViewById(R.id.radioButtonDigital);
+        buttonAnotacoes = findViewById(R.id.buttonAnotacoes);
 
         editTextDataLancamento.setFocusable(false);
 
@@ -109,8 +117,9 @@ public class JogoActivity extends AppCompatActivity {
                 if (sugerirGenero) {
 
                     spinnerGenero.setSelection(ultimoGenero);
-
                 }
+
+                buttonAnotacoes.setVisibility(View.INVISIBLE);
 
             } else {
                 setTitle(getString(R.string.editar_jogo));
@@ -160,6 +169,10 @@ public class JogoActivity extends AppCompatActivity {
 
                 editTextNome.requestFocus();
                 editTextNome.setSelection(editTextNome.getText().length());
+
+                int totalAnotacoes = database.getAnotacaoDao().totalIdJogo(jogoOriginal.getId());
+
+                buttonAnotacoes.setText(getString(R.string.anotacoes, totalAnotacoes));
             }
         }
     }
@@ -520,5 +533,30 @@ public class JogoActivity extends AppCompatActivity {
         editor.commit();
 
         ultimoGenero = novoValor;
+    }
+
+    ActivityResultLauncher<Intent> launcherAnotacoes = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+
+        @Override
+        public void onActivityResult(ActivityResult o) {
+
+            JogosDatabase database = JogosDatabase.getInstance(JogoActivity.this);
+
+            int totalAnotacoes = database.getAnotacaoDao().totalIdJogo(jogoOriginal.getId());
+
+            buttonAnotacoes.setText(getString(R.string.anotacoes, totalAnotacoes));
+
+        }
+    });
+
+    public void abrirAnotacoes(View view) {
+
+        Intent intentAbertura = new Intent(this, AnotacoesActivity.class);
+
+        intentAbertura.putExtra(AnotacoesActivity.KEY_ID_JOGO, jogoOriginal.getId());
+
+        launcherAnotacoes.launch(intentAbertura);
     }
 }

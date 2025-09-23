@@ -74,4 +74,11 @@
     <string name="nota_valor">Nota do Usuário</string>
     <string name="nota">Nota:</string>
     <string name="a_nota_deve_estar_entre_0_e_10">A nota deve ser um número de 0 a 10!</string>
+    <string name="anotacoes_do_jogo">Anotacoes sobre %1$s</string>
+    <string name="deseja_apagar_anotacao">Deseja excluir essa Anotação?</string>
+    <string name="to_texto_nao_pode_ser_vazio">O texto não pode ser vazio!</string>
+    <string name="nova_anotacao">Nova Anotação</string>
+    <string name="edite_texto_anotacao">Editar Anotação</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="anotacoes">Anotações (%1$d)</string>
 </resources>

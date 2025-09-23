@@ -3,6 +3,9 @@ package br.edu.utfpr.colecaojogovideogame.utils;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -66,5 +69,57 @@ public final class UtilsAlert {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    public interface OnTextEnteredListener {
+
+        void onTextEntered(String texto);
+    }
+
+    public static void lerTexto(Context context,
+                                int idTitulo,
+                                int idLayout,
+                                int idEditText,
+                                String textoInicial,
+                                final OnTextEnteredListener listener) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        builder.setTitle(idTitulo);
+        builder.setIcon(android.R.drawable.ic_input_get);
+
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(idLayout, null);
+
+        final EditText editText = view.findViewById(idEditText);
+
+        editText.setText(textoInicial);
+
+        builder.setView(view);
+
+        builder.setPositiveButton(R.string.salvar, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String texto = editText.getText().toString();
+                listener.onTextEntered(texto);
+            }
+        });
+
+        builder.setNegativeButton(R.string.cancelar, null);
+
+        AlertDialog dialog = builder.create();
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+
+            @Override
+            public void onShow(DialogInterface dialog) {
+
+                editText.requestFocus();
+                editText.setSelection(editText.getText().toString().length());
+            }
+        });
+
+        dialog.show();
     }
 }

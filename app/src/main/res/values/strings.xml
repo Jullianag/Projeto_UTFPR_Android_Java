@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">ColecaoJogoVideoGame</string>
-    <string name="autoria" translatable="false">Autor: <a href ="https://www.linkedin.com/in/julliana-gnecco/">Julliana Gnecco</a></string>
+    <string name="autoria" translatable="false">Autor: <a href="https://www.linkedin.com/in/julliana-gnecco/">Julliana Gnecco</a></string>
     <string name="site_utfpr" translatable="false">www.utfpr.edu.br</string>
     <string name="e_mail_autor" translatable="false"><u>jullianagnecco@gmail.com</u></string>
     <string name="nome">Title:</string>
@@ -77,4 +77,11 @@
     <string name="nota_valor">"User Rating"</string>
     <string name="nota">Rating:</string>
     <string name="a_nota_deve_estar_entre_0_e_10">Please enter a rating from 0 to 10!</string>
+    <string name="cancelar">Cancel</string>
+    <string name="anotacoes_do_jogo">Notes about %1$s</string>
+    <string name="deseja_apagar_anotacao">Do you want to delete this note?</string>
+    <string name="to_texto_nao_pode_ser_vazio">The text cannot be empty!</string>
+    <string name="nova_anotacao">New Note</string>
+    <string name="edite_texto_anotacao">Edit Note</string>
+    <string name="anotacoes">Notes (%1$d)</string>
 </resources>

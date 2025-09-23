@@ -12,9 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThemeStylesIcons">
         <activity
+            android:name=".AnotacoesActivity"
+            android:exported="false"
+            android:parentActivityName=".JogoActivity" />
+        <activity
             android:name=".SobreActivity"
             android:exported="false"
-            android:parentActivityName=".JogosActivity"/>
+            android:parentActivityName=".JogosActivity" />
         <activity
             android:name=".JogosActivity"
             android:exported="true"
@@ -28,8 +32,7 @@
         <activity
             android:name=".JogoActivity"
             android:exported="false"
-            android:parentActivityName=".JogosActivity">
-        </activity>
+            android:parentActivityName=".JogosActivity"></activity>
     </application>
 
 </manifest>

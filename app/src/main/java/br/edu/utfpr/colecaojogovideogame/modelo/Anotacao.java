@@ -9,6 +9,7 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 
 @Entity(foreignKeys = {@ForeignKey(
         entity = Jogo.class,
@@ -17,6 +18,14 @@ import java.time.LocalDateTime;
         onDelete = CASCADE)
 })
 public class Anotacao {
+
+    public static Comparator<Anotacao> ordenacaoDecrescente = new Comparator<Anotacao>() {
+
+        @Override
+        public int compare(Anotacao anotacao1, Anotacao anotacao2) {
+            return -1 * anotacao1.getDiaHoraCriacao().compareTo(anotacao2.getDiaHoraCriacao());
+        }
+    };
 
     @PrimaryKey(autoGenerate = true)
     private long id;

@@ -65,7 +65,7 @@ public class JogosActivity extends AppCompatActivity {
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 
             MenuInflater inflate = mode.getMenuInflater();
-            inflate.inflate(R.menu.jogos_item_selecionado, menu);
+            inflate.inflate(R.menu.item_selecionado, menu);
             return true;
         }
 
@@ -302,6 +302,9 @@ public class JogosActivity extends AppCompatActivity {
 
                 listaJogos.remove(posicaoSelecionada);
                 jogoRecyclerViewAdapter.notifyItemRemoved(posicaoSelecionada);
+
+                posicaoSelecionada = -1;
+
                 actionMode.finish();
             }
         };
