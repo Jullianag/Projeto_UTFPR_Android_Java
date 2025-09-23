@@ -21,9 +21,9 @@ Após adicionar os jogos são exibidos em uma lista onde é possível ordenar em
 bem como as validações de possíveis erros ao adicionar um jogo.
 
 ## Algumas imagens do layout
-![Demonstração 1]()
+![Demonstração 1](https://github.com/Jullianag/Projeto_UTFPR_Android_Java/blob/main/app/src/main/assets/frente.jpeg)
 
-![Demonstração 2]()
+![Demonstração 2](https://github.com/Jullianag/Projeto_UTFPR_Android_Java/blob/main/app/src/main/assets/cadastro.jpeg)
 
 ![Demonstração 3]()
 
