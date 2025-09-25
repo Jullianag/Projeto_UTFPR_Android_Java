@@ -21,11 +21,13 @@ Após adicionar os jogos são exibidos em uma lista onde é possível ordenar em
 bem como as validações de possíveis erros ao adicionar um jogo.
 
 ## Algumas imagens do layout
-![Demonstração 1](https://github.com/Jullianag/Projeto_UTFPR_Android_Java/blob/main/app/src/main/assets/frente.jpeg)
+![Demonstração 1](https://github.com/Jullianag/Projeto_UTFPR_Android_Java/blob/main/app/src/main/assets/frente.jpeg) ![Demonstração 2](https://github.com/Jullianag/Projeto_UTFPR_Android_Java/blob/main/app/src/main/assets/cadastro.jpeg)
 
-![Demonstração 2](https://github.com/Jullianag/Projeto_UTFPR_Android_Java/blob/main/app/src/main/assets/cadastro.jpeg)
+![Demonstração 3](https://github.com/Jullianag/Projeto_UTFPR_Android_Java/blob/main/app/src/main/assets/aviso.jpeg)
 
-![Demonstração 3]()
+![Demonstração 4](https://github.com/Jullianag/Projeto_UTFPR_Android_Java/blob/main/app/src/main/assets/lista.jpeg)
+
+![Demonstração 4](https://github.com/Jullianag/Projeto_UTFPR_Android_Java/blob/main/app/src/main/assets/selecionado.jpeg)
 
 # Tecnologias utilizadas
 ## Back end
